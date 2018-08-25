@@ -17,8 +17,8 @@ class Main extends Component<{}> {
     render() {
 
         return (
-            <View style={styles.container}>
-                <StatusBar backgroundColor="#000" barStyle="light-content"/>
+            <View style={styles.appContainer}>
+                <StatusBar backgroundColor="#e0e0e0" barStyle="dark-content"/>
                 <Routes/>
             </View>
         );
