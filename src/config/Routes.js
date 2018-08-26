@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Router, Scene} from "react-native-router-flux";
 
 import Dashboard from "./../screens/Dashboard";
+import ProductDetails from "./../screens/ProductDetails";
+import CartDetails from "./../screens/CartDetails";
 
 export default class Routes extends Component<{}> {
 
@@ -12,6 +14,8 @@ export default class Routes extends Component<{}> {
 								<Scene>
 										<Scene key="app" hideNavBar={true} initial={true} >
 												<Scene key="dashboard" component={Dashboard} title="Dashboard" />
+												<Scene key="productDetails" component={ProductDetails} title="ProductDetails" />
+												<Scene key="cartDetails" component={CartDetails} title="CartDetails" />
 										</Scene>
 								</Scene>
 						</Router>

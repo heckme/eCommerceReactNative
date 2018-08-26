@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Text, View, ScrollView} from "react-native";
+import {Text, View, ScrollView, TouchableOpacity} from "react-native";
 import {Col, Row, Grid} from "react-native-easy-grid";
 import {Card, ListItem, Button, Divider} from "react-native-elements";
 
@@ -8,34 +8,44 @@ import {arrayChunking} from "./../utils";
 import styles from "./../styles/styles";
 
 const defaultProps = {
-    productList: [1, 2, 3, 4, 5, 6, 7]
+    data: []
 }
 
 class ProductList extends Component<{}> {
 
-    renderCardView = () => (
-      <Card
-          containerStyle={styles.cardContainer}
-          imageStyle={{height: 180}}
-          image={require('./../assets/tshirt2.jpg')}>
-          <Divider style={{ backgroundColor: '#cccccc' }} />
-          <Text style={styles.cardTextTitle}>
-            The idea with React
-          </Text>
-          <Text style={styles.cardTextSubtitle}>
-            Rs. 799/-
-          </Text>
-      </Card>
+    handleNavigateToProductDetails = (product) => {
+        this.props.handleNavigateToProductDetails(product);
+    }
+
+    renderCardView = (product) => (
+      <TouchableOpacity onPress={() => this.handleNavigateToProductDetails(product)}>
+          <Card
+              containerStyle={styles.cardContainer}
+              imageStyle={{height: 180}}
+              image={require('./../assets/tshirt2.jpg')}>
+              <Divider style={{ backgroundColor: '#cccccc' }} />
+              <Text style={styles.cardTextTitle}>
+                The idea with React
+              </Text>
+              <Text style={styles.cardTextSubtitle}>
+                Rs. 799/-
+              </Text>
+          </Card>
+      </TouchableOpacity>
     )
 
     renderProductList = () => {
-        const {productList} = this.props;
-        return arrayChunking(2, productList).map((product, index) => (
+        const {data} = this.props;
+        const dataCopy = JSON.parse(JSON.stringify(data));
+        if(dataCopy.length % 2 !== 0) {
+          dataCopy.push("");
+        }
+        return arrayChunking(2, dataCopy).map((productList, index) => (
             <Grid key={index}>
                 {
-                    product.map((p, i) => (
+                    productList.map((product, i) => (
                         <Col key={i}>
-                            {this.renderCardView()}
+                            {product ? this.renderCardView(product) : <Text></Text>}
                         </Col>
                     ))
                 }

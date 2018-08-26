@@ -1,22 +1,30 @@
 import React, {Component} from "react";
-import {Text, View} from "react-native";
-import {Icon} from 'react-native-elements'
+import {Text, View, TouchableOpacity} from "react-native";
+import {Icon} from "react-native-elements";
 
 import styles from "./../styles/styles";
+
+const defaultProps = {
+    handleClickIcon: () => {}
+}
 
 class MenuIcon extends Component<{}> {
 
     render() {
         return (
-          <View style={styles.menuIconContainer}>
-              <Icon
-                  name='menu'
-                  type='material-community'
-                  size={36}
-                  color='#000000'/>
-          </View>
+          <TouchableOpacity onPress={this.props.handleClickIcon}>
+              <View style={styles.menuIconContainer}>
+                  <Icon
+                      name={this.props.name}
+                      type='material-community'
+                      size={this.props.size}
+                      color='#000000'/>
+              </View>
+          </TouchableOpacity>
         );
     }
 }
+
+MenuIcon.defaultProps = defaultProps;
 
 export default MenuIcon;

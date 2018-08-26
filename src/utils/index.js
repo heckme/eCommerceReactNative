@@ -1,3 +1,5 @@
+import {Actions, ActionConst} from "react-native-router-flux";
+
 export const arrayChunking = (num, arr) => {
     const newArr = [];
     let count = 0;
@@ -10,4 +12,22 @@ export const arrayChunking = (num, arr) => {
         count++;
     })
     return newArr;
+}
+
+export const redirectTo = (scene) => {
+    if (Actions.currentScene) {
+        Actions.reset(scene);
+    }
+}
+
+export const navigateTo = (scene, props = null) => {
+    if(props) {
+        Actions.push(scene, props);
+    } else {
+        Actions[scene].call();
+    }
+}
+
+export const navigateBack = () => {
+    Actions.pop();
 }
