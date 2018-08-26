@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Text, View, ScrollView, TouchableOpacity} from "react-native";
 import {Col, Row, Grid} from "react-native-easy-grid";
-import {Card, ListItem, Button, Divider} from "react-native-elements";
+import {Card, ListItem, Button, Divider, SearchBar} from "react-native-elements";
 
 import {arrayChunking} from "./../utils";
 
@@ -22,6 +22,7 @@ class ProductList extends Component<{}> {
           <Card
               containerStyle={styles.cardContainer}
               imageStyle={{height: 180}}
+              imageProps={{resizeMode:"contain"}}
               image={require('./../assets/tshirt2.jpg')}>
               <Divider style={{ backgroundColor: '#cccccc' }} />
               <Text style={styles.cardTextTitle}>
@@ -55,7 +56,7 @@ class ProductList extends Component<{}> {
 
     render() {
         return (
-            <ScrollView style={{padding: 8}}>
+            <ScrollView style={{paddingLeft:4, paddingRight: 4}}>
                 {this.renderProductList()}
             </ScrollView>
         );

@@ -67,7 +67,7 @@ class ProductDetails extends Component<{}> {
                               iconSize={18}
                               iconColor="#ffffff"
                               iconType="foundation"
-                              onPress={() => {navigateTo("cartDetails")}} />
+                              onPress={() => navigateTo("cartDetails")} />
                       </Col>
                   </Grid>
               </StickyFooter>

@@ -38,11 +38,11 @@ class Dashboard extends Component<{}> {
                     <MenuIcon name="menu" size={36}/>
                     <View style={styles.toolbarUtils}>
                         <Text style={styles.appTitle}>E-Com</Text>
-                        <TouchableOpacity onPress={() => console.log("cart")}>
+                        <TouchableOpacity onPress={() => navigateTo("cartDetails")}>
                             <Icon
-                                name="cart"
-                                type="material-community"
-                                size={32}
+                                name="shopping-bag"
+                                type="foundation"
+                                size={28}
                                 color="#000000"/>
                         </TouchableOpacity>
                     </View>
