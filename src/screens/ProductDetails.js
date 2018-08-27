@@ -15,6 +15,10 @@ import {navigateBack, navigateTo} from "./../utils";
 
 import styles from "./../styles/styles";
 
+defaultProps = {
+    product: {}
+}
+
 class ProductDetails extends Component<{}> {
     constructor(props) {
         super(props);
@@ -30,6 +34,7 @@ class ProductDetails extends Component<{}> {
     }
 
     render() {
+        const {product} = this.props;
         return (
           <View style={styles.productContainer}>
               <Toolbar>
@@ -42,8 +47,8 @@ class ProductDetails extends Component<{}> {
                   </View>
               </Toolbar>
               <ScrollView>
-                  <ImageSwiper />
-                  <ProductTitlePrice />
+                  <ImageSwiper images={product.coverImages}/>
+                  <ProductTitlePrice price={product.productPrice} title={product.productBrand} />
                   <ProductSize handleProductSize={this.getProductSize} size={this.state.size}/>
                   <ProductInfo />
                   <View style={styles.bottomGapInScrollView} />
@@ -75,6 +80,8 @@ class ProductDetails extends Component<{}> {
         );
     }
 }
+
+ProductDetails.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({});
 

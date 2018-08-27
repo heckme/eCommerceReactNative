@@ -1,23 +1,26 @@
 import React, {Component} from "react";
-import {Text, View} from "react-native";
+import {Text, View, Image} from "react-native";
 import Swiper from 'react-native-swiper';
 
 import styles from "./../styles/styles";
 
 class ImageSwiper extends Component<{}> {
 
+    renderSlides = (images) => {
+        if(images.length > 0) {
+            return images.map((image, index) => (
+                <View style={styles.swiperSlide} key={index}>
+                    <Image source={image} />
+                </View>
+            ))
+        }
+    }
+
     render() {
+        const {images} = this.props;
         return (
-          <Swiper style={styles.wrapper} showsButtons={true}>
-              <View style={styles.slide1}>
-                  <Text style={styles.text}>Hello Swiper</Text>
-              </View>
-              <View style={styles.slide2}>
-                  <Text style={styles.text}>Beautiful</Text>
-              </View>
-              <View style={styles.slide3}>
-                  <Text style={styles.text}>And simple</Text>
-              </View>
+          <Swiper style={styles.swiperWrapper} showsButtons={true}>
+              {this.renderSlides(images)}
           </Swiper>
         );
     }

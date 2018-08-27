@@ -3,16 +3,22 @@ import {Text, View} from "react-native";
 
 import styles from "./../styles/styles";
 
+const defaultProps = {
+    title: "The black leather bag",
+    price: "$199"
+}
 class ProductTitlePrice extends Component<{}> {
 
     render() {
         return (
           <View style={styles.productDetailContainer}>
-              <Text style={styles.productTitle}>The black leather bag</Text>
-              <Text style={styles.productPrice}>$199</Text>
+              <Text style={styles.productTitle}>{this.props.title}</Text>
+              <Text style={styles.productPrice}>{this.props.price}</Text>
           </View>
         );
     }
 }
+
+ProductTitlePrice.defaultProps = defaultProps;
 
 export default ProductTitlePrice;

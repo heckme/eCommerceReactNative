@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     appTitle: {
-        fontSize: 24,
+        fontSize: 22,
         color: "#000000",
         fontWeight: "500"
     },
@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
     },
     productContainer: {
         flex: 1,
+        backgroundColor: "#ffffff",
+    },
+    confirmContainer: {
+        flex: 1,
         backgroundColor: "#fefefe",
     },
     toolbarContainer: {
@@ -35,7 +39,7 @@ const styles = StyleSheet.create({
         width: "100%",
         flexDirection: "row",
         alignItems: "center",
-        elevation: 4
+        elevation: 6
     },
     toolbarUtils: {
         justifyContent: "space-between",
@@ -44,11 +48,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingRight: 16
     },
+    utilsIconCont: {
+        width: 85
+    },
     justifyCenter: {
         justifyContent: "center",
     },
     alignCenter: {
         alignItems: "center",
+    },
+    justifySpaceBetween: {
+        justifyContent: "space-between"
     },
     cardContainer: {
         marginTop: 8,
@@ -57,49 +67,30 @@ const styles = StyleSheet.create({
         marginBottom: 0
     },
     cardTextTitle: {
-        marginTop: 8,
         marginBottom: 4,
-        fontSize: 14,
+        fontSize: 16,
         color: "#000",
-        textAlign: "center"
     },
     cardTextSubtitle: {
-        marginBottom: 8,
-        fontSize: 14,
+        marginBottom: 4,
+        fontSize: 16,
         color: "#000",
-        textAlign: "center",
         fontWeight: "500"
     },
-    wrapper: {
-        height: 300
+    cardTextDesc: {
+        marginBottom: 8,
+        fontSize: 14,
     },
-    slide1: {
+    swiperWrapper: {
+        height: 400
+    },
+    swiperSlide: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#9DD6EB',
+        alignItems: 'center'
     },
-    slide2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#97CAE5',
-    },
-    slide3: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#92BBD9',
-    },
-    text: {
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold',
-    },
-
     productDetailContainer: {
         borderBottomWidth: 1,
-        borderBottomColor: "#999",
+        borderBottomColor: "#dddddd",
         backgroundColor:"#ffffff",
         padding: 18
     },
@@ -112,6 +103,7 @@ const styles = StyleSheet.create({
     productSize: {
         fontSize: 16,
         paddingBottom: 16,
+        color: "#000000"
     },
     productPrice: {
         fontSize: 18,
@@ -151,7 +143,8 @@ const styles = StyleSheet.create({
         paddingBottom: 8
     },
     productDetialsDesc: {
-      fontSize: 14
+      fontSize: 14,
+      lineHeight: 18
     },
     flexButtonContainer: {
         flexDirection: "row",
@@ -251,6 +244,17 @@ const styles = StyleSheet.create({
         lineHeight: 22,
         color: "#333333"
     },
+    dateText: {
+        fontSize: 14,
+        lineHeight: 22,
+        color: "#000000",
+        fontWeight: "500",
+        textAlign: "right"
+    },
+    deliveryText: {
+        fontSize: 14,
+        lineHeight: 22
+    },
     itemSoldBy: {
         paddingVertical: 3
     },
@@ -266,6 +270,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flex: 1,
         padding: 16,
+        paddingBottom: 8,
         justifyContent: "space-between"
     },
     boldText: {
@@ -287,8 +292,21 @@ const styles = StyleSheet.create({
     padding16: {
         padding: 16,
         paddingTop: 8
+    },
+    addressText: {
+        fontSize: 14,
+        lineHeight: 22,
+        width: "60%",
+        paddingVertical: 16,
+        paddingHorizontal: 16
+    },
+    summeryItemsText: {
+        padding: 16
+    },
+    flexRow: {
+        flex: 1,
+        flexDirection: "row"
     }
-
 });
 
 export default styles;

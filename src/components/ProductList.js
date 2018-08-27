@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Text, View, ScrollView, TouchableOpacity} from "react-native";
+import {Text, View, ScrollView, TouchableOpacity, Dimensions} from "react-native";
 import {Col, Row, Grid} from "react-native-easy-grid";
 import {Card, ListItem, Button, Divider, SearchBar} from "react-native-elements";
 
@@ -13,23 +13,45 @@ const defaultProps = {
 
 class ProductList extends Component<{}> {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageHeight: ""
+        }
+    }
+
+    componentDidMount() {
+        this.onCardlayout();
+    }
+
     handleNavigateToProductDetails = (product) => {
         this.props.handleNavigateToProductDetails(product);
+    }
+
+    onCardlayout = () => {
+        var {height, width} = Dimensions.get('window');
+        const cardWidth = (parseInt(width) - 28) / 2;
+        const height = (cardWidth * 133.33) / 100;
+        this.setState({
+            imageHeight: parseInt(height)
+        })
     }
 
     renderCardView = (product) => (
       <TouchableOpacity onPress={() => this.handleNavigateToProductDetails(product)}>
           <Card
               containerStyle={styles.cardContainer}
-              imageStyle={{height: 180}}
+              imageStyle={{height:this.state.imageHeight}}
               imageProps={{resizeMode:"contain"}}
-              image={require('./../assets/tshirt2.jpg')}>
-              <Divider style={{ backgroundColor: '#cccccc' }} />
+              image={product.thumbnail}>
               <Text style={styles.cardTextTitle}>
-                The idea with React
+                {product.productBrand}
               </Text>
               <Text style={styles.cardTextSubtitle}>
-                Rs. 799/-
+                {product.productPrice}
+              </Text>
+              <Text style={styles.cardTextDesc}>
+                {product.productDesc}
               </Text>
           </Card>
       </TouchableOpacity>

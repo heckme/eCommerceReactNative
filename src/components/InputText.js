@@ -23,7 +23,7 @@ class InputText extends Component<{}> {
                 underlineColorAndroid="rgba(0,0,0,0)"
                 placeholder={this.props.placeholder}
                 placeholderTextColor="rgba(0,0,0,0.8)"
-                selectionColor= "#fff"
+                selectionColor= "#999999"
                 autoCapitalize= "words"
                 keyboardType= "default"
                 returnKeyType= "next"

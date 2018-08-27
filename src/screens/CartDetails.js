@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
 import {Text, View, ScrollView} from "react-native";
-import { Button } from 'react-native-elements';
+import { Button } from "react-native-elements";
 
 import Toolbar from "./../components/Toolbar";
 import CartItem from "./../components/CartItem";

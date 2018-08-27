@@ -5,6 +5,7 @@ import Dashboard from "./../screens/Dashboard";
 import ProductDetails from "./../screens/ProductDetails";
 import CartDetails from "./../screens/CartDetails";
 import AddressDetails from "./../screens/AddressDetails";
+import ConfirmOrder from "./../screens/ConfirmOrder";
 
 export default class Routes extends Component<{}> {
 
@@ -18,6 +19,7 @@ export default class Routes extends Component<{}> {
 												<Scene key="productDetails" component={ProductDetails} title="ProductDetails" />
 												<Scene key="cartDetails" component={CartDetails} title="CartDetails" />
 												<Scene key="addressDetails" component={AddressDetails} title="AddressDetails" />
+												<Scene key="confirmOrder" component={ConfirmOrder} title="ConfirmOrder" />
 										</Scene>
 								</Scene>
 						</Router>

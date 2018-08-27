@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements';
 
 import Toolbar from "./../components/Toolbar";
 import InputText from "./../components/InputText";
+import {navigateTo} from "./../utils";
 
 import styles from "./../styles/styles";
 
@@ -78,20 +79,41 @@ class AddressDetails extends Component<{}> {
                       <Text style={styles.boldText}>Add New Address</Text>
                   </View>
                   <View style={[styles.priceDetailContainer, styles.padding16]}>
-                      <InputText placeholder="Pin Code" value={this.state.pincode} onChangeText={this.onChangePin} />
-                      <InputText placeholder="Locality" value={this.state.locality} onChangeText={this.onChangeLocality} />
-                      <InputText placeholder="City" value={this.state.city} onChangeText={this.onChangeCity} />
-                      <InputText placeholder="State" value={this.state.state} onChangeText={this.onChangeState} />
+                      <InputText
+                          placeholder="Pin Code"
+                          value={this.state.pincode}
+                          onChangeText={this.onChangePin} />
+                      <InputText
+                          placeholder="Locality"
+                          value={this.state.locality}
+                          onChangeText={this.onChangeLocality} />
+                      <InputText
+                          placeholder="City"
+                          value={this.state.city}
+                          onChangeText={this.onChangeCity} />
+                      <InputText
+                          placeholder="State"
+                          value={this.state.state}
+                          onChangeText={this.onChangeState} />
                   </View>
                   <View style={[styles.priceDetailContainer, styles.padding16]}>
-                      <InputText placeholder="Name" value={this.state.name}  onChangeText={this.onChangeName} />
-                      <InputText placeholder="Address" value={this.state.address}  onChangeText={this.onChangeAddress} />
-                      <InputText placeholder="Mobile" value={this.state.mobile}  onChangeText={this.onChangeMobile} />
+                      <InputText
+                          placeholder="Name"
+                          value={this.state.name}
+                          onChangeText={this.onChangeName} />
+                      <InputText
+                          placeholder="Address"
+                          value={this.state.address}
+                          onChangeText={this.onChangeAddress} />
+                      <InputText
+                          placeholder="Mobile"
+                          value={this.state.mobile}
+                          onChangeText={this.onChangeMobile} />
                   </View>
                   <Button
                       title="Save"
                       backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
-                      onPress={() => navigateTo("addressDetails")}/>
+                      onPress={() => navigateTo("confirmOrder")}/>
               </ScrollView>
           </View>
         );
