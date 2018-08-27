@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     swiperWrapper: {
-        height: 400
+        height: 450
     },
     swiperSlide: {
         flex: 1,
@@ -333,6 +333,42 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "500",
         paddingHorizontal: 8 ,
+    },
+    subCategoryContainer: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        top:0,
+        backgroundColor: "#FFFFFF",
+    },
+    subCatHeader: {
+        height: 80,
+        flexDirection: "row",
+        alignItems: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: "#dddddd"
+    },
+    categoryTitle: {
+        fontSize: 16,
+        fontWeight: "500",
+        color: "#000"
+    },
+    subCatListItem: {
+        fontSize: 16,
+        paddingVertical: 16,
+        borderBottomColor: "#dddddd",
+        borderBottomWidth: 1,
+        paddingHorizontal: 32
+    },
+    stickyToolbar: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        left: 0,
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        zIndex: 1,
+        elevation: 0
     }
 });
 

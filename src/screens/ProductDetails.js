@@ -41,10 +41,8 @@ class ProductDetails extends Component<{}> {
                   <MenuIcon
                       name="arrow-left"
                       size={32}
-                      handleClickIcon={navigateBack}/>
-                  <View style={styles.toolbarUtils}>
-                      <Text style={styles.appTitle}>Product Details</Text>
-                  </View>
+                      color="#000000"
+                      onPress={navigateBack}/>
               </Toolbar>
               <ScrollView>
                   <ImageSwiper images={product.coverImages}/>

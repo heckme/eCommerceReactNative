@@ -1,19 +1,24 @@
 import React, {Component} from "react";
-import {Text, View, TouchableNativeFeedback} from "react-native";
+import {Text, View} from "react-native";
 
 import CategoryListItem from "./CategoryListItem";
 
 import styles from "./../styles/styles";
 
+const defaultProps = {
+    handleSlideSubCategory: () => {}
+}
+
 class CategoryList extends Component<{}> {
 
     render() {
         return (
-          <View style={styles.categorylistContainer}>
+          <View>
                 <CategoryListItem
                     itemName="Men"
                     iconName="human-male"
-                    style={styles.paddingTop8} />
+                    style={styles.paddingTop8}
+                    onPress={this.props.handleSlideSubCategory} />
                 <CategoryListItem
                     itemName="Women"
                     iconName="human-female" />
@@ -30,5 +35,7 @@ class CategoryList extends Component<{}> {
         );
     }
 }
+
+CategoryList.defaultProps = defaultProps;
 
 export default CategoryList;

@@ -5,7 +5,10 @@ import {Icon} from "react-native-elements";
 import styles from "./../styles/styles";
 
 const defaultProps = {
-    handleClickIcon: () => {}
+    onPress: () => {},
+    name: "",
+    size: 23,
+    color: "#000000"
 }
 
 class MenuIcon extends Component<{}> {
@@ -18,7 +21,7 @@ class MenuIcon extends Component<{}> {
                       name={this.props.name}
                       type='material-community'
                       size={this.props.size}
-                      color='#000000'/>
+                      color={this.props.color} />
               </View>
           </TouchableOpacity>
         );

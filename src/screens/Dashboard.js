@@ -19,7 +19,7 @@ class Dashboard extends Component<{}> {
         this.state = {
             data: [],
             showSearchbar: false
-        }
+        };
     }
 
     componentDidMount() {
@@ -36,8 +36,13 @@ class Dashboard extends Component<{}> {
         console.log("search clear");
     }
 
+    navigateToProductCatlog = (category) => {
+        this.closeDrawer();
+        navigateTo("productCatlog", {category});
+    }
+
     navigateToProductDetails = (product) => {
-        navigateTo("productDetails", {product})
+        navigateTo("productDetails", {product});
     }
 
     toggleSearchbar = () => {
@@ -47,11 +52,15 @@ class Dashboard extends Component<{}> {
     }
 
     openDrawer = () => {
-        this.drawer.openDrawer()
+        this.drawer.openDrawer();
+    }
+
+    closeDrawer = () => {
+        this.drawer.closeDrawer();
     }
 
     render() {
-        const navigationView = (<Sidebar/>);
+        const navigationView = (<Sidebar onPressMenuItem={this.navigateToProductCatlog}/>);
         return (
           <DrawerLayoutAndroid
               drawerWidth={300}
