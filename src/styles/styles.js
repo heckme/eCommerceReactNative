@@ -33,6 +33,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fefefe",
     },
+    sidebarContainer: {
+        flex: 1,
+        backgroundColor: "#fefefe",
+    },
     toolbarContainer: {
         height: 56,
         backgroundColor: "#fefefe",
@@ -143,8 +147,8 @@ const styles = StyleSheet.create({
         paddingBottom: 8
     },
     productDetialsDesc: {
-      fontSize: 14,
-      lineHeight: 18
+        fontSize: 14,
+        lineHeight: 18
     },
     flexButtonContainer: {
         flexDirection: "row",
@@ -278,7 +282,7 @@ const styles = StyleSheet.create({
         fontWeight: "500"
     },
     noPaddingTop: {
-      paddingTop: 0
+        paddingTop: 0
     },
     marginBottom16: {
         marginBottom: 16
@@ -306,6 +310,29 @@ const styles = StyleSheet.create({
     flexRow: {
         flex: 1,
         flexDirection: "row"
+    },
+    userInfoContainer: {
+        height: 170,
+        backgroundColor: "#333333",
+        paddingHorizontal: 32 ,
+        justifyContent: "center"
+    },
+    userNameText: {
+        fontSize: 18,
+        color: "#fff",
+        paddingTop: 16
+    },
+    paddingTop8: {
+        paddingTop: 24
+    },
+    listzItemContainer: {
+        paddingVertical: 12,
+        paddingHorizontal: 24
+    },
+    menuListText: {
+        fontSize: 16,
+        fontWeight: "500",
+        paddingHorizontal: 8 ,
     }
 });
 

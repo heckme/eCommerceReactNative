@@ -12,7 +12,7 @@ class MenuIcon extends Component<{}> {
 
     render() {
         return (
-          <TouchableOpacity onPress={this.props.handleClickIcon}>
+          <TouchableOpacity onPress={this.props.onPress}>
               <View style={styles.menuIconContainer}>
                   <Icon
                       name={this.props.name}
