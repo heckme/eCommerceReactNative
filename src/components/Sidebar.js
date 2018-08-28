@@ -14,9 +14,26 @@ class Sidebar extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
-            slideValue: new Animated.Value(300)
+            slideValue: new Animated.Value(300),
+            categories: [],
+            subCategories: []
         }
         this.isSubCategoryHidden = true;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.categories.length > 0) {
+            this.setState({
+                categories: nextProps.categories
+            });
+        }
+    }
+
+    updateSubCategoriesList = (subCategories) => {
+        this.setState({
+            subCategories
+        });
+        this._toggleSubCategory();
     }
 
     _toggleSubCategory = () => {
@@ -40,7 +57,10 @@ class Sidebar extends Component<{}> {
             <View style={styles.sidebarContainer}>
                 <ScrollView>
                     <UserInformation />
-                    <CategoryList handleSlideSubCategory={this._toggleSubCategory} />
+                    <CategoryList
+                        handleUpdateSubCategoriesList={this.updateSubCategoriesList}
+                        categories={this.state.categories}
+                        onPressMenuItem={this.props.onPressMenuItem} />
                 </ScrollView>
                 <Animated.View style={[styles.subCategoryContainer, {transform: [{translateX: this.state.slideValue}]}]}>
                     <View style={styles.subCatHeader}>
@@ -51,7 +71,9 @@ class Sidebar extends Component<{}> {
                         <Text style={styles.categoryTitle}>Men</Text>
                     </View>
                     <ScrollView>
-                        <SubCategoryList onPressMenuItem={this.props.onPressMenuItem}/>
+                        <SubCategoryList
+                            subCategories={this.state.subCategories}
+                            onPressMenuItem={this.props.onPressMenuItem}/>
                     </ScrollView>
                 </Animated.View>
             </View>

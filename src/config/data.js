@@ -1,9 +1,14 @@
 export default [
   {
+    id: 0,
     productBrand: "Luis Philip",
-    productPrice: "$755",
+    category: "women",
+    subCategory: "cloths",
+    productPrice: 755,
     productDesc: "Slim fit women cloth",
     thumbnail: require("./../assets/product_1.jpg"),
+    sizeAvailable: ["small", "medium", "large", "extra-large"],
+    productSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     coverImages:[
         require("./../assets/cover_2.jpg"),
         require("./../assets/cover_3.jpg"),
@@ -11,10 +16,15 @@ export default [
     ]
   },
   {
+    id: 1,
     productBrand: "Luis Philip",
-    productPrice: "$755",
+    category: "women",
+    subCategory: "cloths",
+    productPrice: 755,
     productDesc: "Slim fit women cloth",
     thumbnail: require("./../assets/product_2.jpg"),
+    sizeAvailable: ["small", "medium", "large", "extra-large"],
+    productSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     coverImages:[
         require("./../assets/cover_2.jpg"),
         require("./../assets/cover_3.jpg"),
@@ -22,10 +32,15 @@ export default [
     ]
   },
   {
+    id: 2,
     productBrand: "Luis Philip",
-    productPrice: "$755",
+    category: "women",
+    subCategory: "cloths",
+    productPrice: 755,
     productDesc: "Slim fit women cloth",
     thumbnail: require("./../assets/product_3.jpg"),
+    sizeAvailable: ["small", "medium", "large", "extra-large"],
+    productSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     coverImages:[
         require("./../assets/cover_2.jpg"),
         require("./../assets/cover_3.jpg"),
@@ -33,10 +48,15 @@ export default [
     ]
   },
   {
+    id: 3,
     productBrand: "Luis Philip",
-    productPrice: "$755",
+    category: "women",
+    subCategory: "cloths",
+    productPrice: 755,
     productDesc: "Slim fit women cloth",
     thumbnail: require("./../assets/product_4.jpg"),
+    sizeAvailable: ["small", "medium", "large", "extra-large"],
+    productSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     coverImages:[
         require("./../assets/cover_2.jpg"),
         require("./../assets/cover_3.jpg"),
@@ -44,10 +64,15 @@ export default [
     ]
   },
   {
+    id: 4,
     productBrand: "Luis Philip",
-    productPrice: "$755",
+    category: "women",
+    subCategory: "cloths",
+    productPrice: 755,
     productDesc: "Slim fit women cloth",
     thumbnail: require("./../assets/product_5.jpg"),
+    sizeAvailable: ["small", "medium", "large", "extra-large"],
+    productSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     coverImages:[
         require("./../assets/cover_2.jpg"),
         require("./../assets/cover_3.jpg"),
@@ -55,10 +80,15 @@ export default [
     ]
   },
   {
+    id: 5,
     productBrand: "Luis Philip",
-    productPrice: "$755",
+    category: "women",
+    subCategory: "cloths",
+    productPrice: 755,
     productDesc: "Slim fit women cloth",
     thumbnail: require("./../assets/product_6.jpg"),
+    sizeAvailable: ["small", "medium", "large", "extra-large"],
+    productSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     coverImages:[
         require("./../assets/cover_2.jpg"),
         require("./../assets/cover_3.jpg"),
@@ -66,10 +96,15 @@ export default [
     ]
   },
   {
+    id: 6,
     productBrand: "Luis Philip",
-    productPrice: "$755",
+    category: "women",
+    subCategory: "cloths",
+    productPrice: 755,
     productDesc: "Slim fit women cloth",
     thumbnail: require("./../assets/product_7.jpg"),
+    sizeAvailable: ["small", "medium", "large", "extra-large"],
+    productSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     coverImages:[
         require("./../assets/cover_2.jpg"),
         require("./../assets/cover_3.jpg"),

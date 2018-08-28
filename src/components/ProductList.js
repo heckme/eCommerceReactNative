@@ -3,7 +3,7 @@ import {Text, View, ScrollView, TouchableOpacity, Dimensions} from "react-native
 import {Col, Row, Grid} from "react-native-easy-grid";
 import {Card, ListItem, Button, Divider, SearchBar} from "react-native-elements";
 
-import {arrayChunking} from "./../utils";
+import {arrayChunking, renderCurrency} from "./../utils";
 
 import styles from "./../styles/styles";
 
@@ -48,7 +48,7 @@ class ProductList extends Component<{}> {
                 {product.productBrand}
               </Text>
               <Text style={styles.cardTextSubtitle}>
-                {product.productPrice}
+                {renderCurrency()} {product.productPrice}
               </Text>
               <Text style={styles.cardTextDesc}>
                 {product.productDesc}

@@ -9,6 +9,7 @@ import Toolbar from "./../components/Toolbar";
 import MenuIcon from "./../components/MenuIcon";
 import {navigateTo} from "./../utils";
 import data from "./../config/data";
+import categories from "./../config/category";
 
 import styles from "./../styles/styles";
 
@@ -18,13 +19,14 @@ class Dashboard extends Component<{}> {
         super(props);
         this.state = {
             data: [],
+            categories: [],
             showSearchbar: false
         };
     }
 
     componentDidMount() {
         this.setState({
-          data
+          data, categories
         });
     }
 
@@ -60,7 +62,7 @@ class Dashboard extends Component<{}> {
     }
 
     render() {
-        const navigationView = (<Sidebar onPressMenuItem={this.navigateToProductCatlog}/>);
+        const navigationView = (<Sidebar categories={this.state.categories} onPressMenuItem={this.navigateToProductCatlog}/>);
         return (
           <DrawerLayoutAndroid
               drawerWidth={300}

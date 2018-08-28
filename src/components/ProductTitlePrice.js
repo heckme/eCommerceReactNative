@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Text, View} from "react-native";
 
+import {renderCurrency} from "./../utils";
+
 import styles from "./../styles/styles";
 
 const defaultProps = {
@@ -13,7 +15,8 @@ class ProductTitlePrice extends Component<{}> {
         return (
           <View style={styles.productDetailContainer}>
               <Text style={styles.productTitle}>{this.props.title}</Text>
-              <Text style={styles.productPrice}>{this.props.price}</Text>
+              <Text style={styles.productPrice}>{renderCurrency()} {this.props.price}</Text>
+              <Text>{this.props.desc}</Text>
           </View>
         );
     }

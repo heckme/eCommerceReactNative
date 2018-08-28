@@ -1,4 +1,5 @@
 import {Actions, ActionConst} from "react-native-router-flux";
+import {RUPEE} from "./../constants/currency";
 
 export const redirectTo = (scene) => {
     if (Actions.currentScene) {
@@ -32,6 +33,10 @@ export const arrayChunking = (num, arr) => {
     return newArr;
 }
 
-export const gcd = (a, b) => {
-    return (b == 0) ? a : gcd (b, a%b);
+export const deleteObjectFromArray = (array, object) => {
+    return array.filter((item) => (item.id !== object.id))
+}
+
+export const renderCurrency = () => {
+    return RUPEE;
 }

@@ -5,34 +5,21 @@ import styles from "./../styles/styles";
 
 class SubCategoryList extends Component<{}> {
 
+    renderSubCategoryItems = (subCategories) => {
+        return subCategories.map(subCategory => (
+            <TouchableNativeFeedback key={subCategory.subCategoryName} onPress={() => this.props.onPressMenuItem(subCategory.subCategoryName)}>
+                <View>
+                    <Text style={styles.subCatListItem}>{subCategory.subCategoryName}</Text>
+                </View>
+            </TouchableNativeFeedback>
+        ))
+    }
+
     render() {
+        const {subCategories} = this.props;
         return (
           <View>
-              <TouchableNativeFeedback onPress={() => this.props.onPressMenuItem("brands")}>
-                  <View>
-                      <Text style={styles.subCatListItem}>Brands</Text>
-                  </View>
-              </TouchableNativeFeedback>
-              <TouchableNativeFeedback onPress={() => console.log("item pressed")}>
-                  <View>
-                      <Text style={styles.subCatListItem}>Shoes</Text>
-                  </View>
-              </TouchableNativeFeedback>
-              <TouchableNativeFeedback onPress={() => console.log("item pressed")}>
-                  <View>
-                      <Text style={styles.subCatListItem}>Inner Wear</Text>
-                  </View>
-              </TouchableNativeFeedback>
-              <TouchableNativeFeedback onPress={() => console.log("item pressed")}>
-                  <View>
-                      <Text style={styles.subCatListItem}>Formal Shirts</Text>
-                  </View>
-              </TouchableNativeFeedback>
-              <TouchableNativeFeedback onPress={() => console.log("item pressed")}>
-                  <View>
-                      <Text style={styles.subCatListItem}>Jeans</Text>
-                  </View>
-              </TouchableNativeFeedback>
+              {this.renderSubCategoryItems(subCategories)}
           </View>
         );
     }

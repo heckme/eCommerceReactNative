@@ -6,6 +6,7 @@ import styles from "./../styles/styles";
 class CartItem extends Component<{}> {
 
     render() {
+        const {product} = this.props;
         return (
           <View style={styles.cartItemContainer}>
               <View style={styles.rowContainer}>
@@ -20,7 +21,7 @@ class CartItem extends Component<{}> {
                   </View>
               </View>
               <View style={styles.removeCartItemCont}>
-                  <TouchableOpacity onPress={() => console.log("item remove")}>
+                  <TouchableOpacity onPress={() => this.props.handleRemoveProductFromCart(product)}>
                       <Text style={styles.removeCartItemText}>Remove</Text>
                   </TouchableOpacity>
               </View>

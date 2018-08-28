@@ -11,26 +11,30 @@ const defaultProps = {
 
 class CategoryList extends Component<{}> {
 
+    renderCategoryItems = (categories) => {
+        return categories.map(category => (
+            <CategoryListItem
+                itemName={category.categoryName}
+                iconName={category.iconName}
+                key={category.id}
+                style={styles.paddingTop8}
+                onPress={() => this.handleUpdateSubCategoriesList(category)} />
+        ));
+    }
+
+    handleUpdateSubCategoriesList = (category) => {
+        if (category.subCategories.length > 0) {
+            this.props.handleUpdateSubCategoriesList(category.subCategories);
+        } else {
+            this.props.onPressMenuItem(category.categoryName);
+        }
+    }
+
     render() {
+        const {categories} = this.props;
         return (
           <View>
-                <CategoryListItem
-                    itemName="Men"
-                    iconName="human-male"
-                    style={styles.paddingTop8}
-                    onPress={this.props.handleSlideSubCategory} />
-                <CategoryListItem
-                    itemName="Women"
-                    iconName="human-female" />
-                <CategoryListItem
-                    itemName="Kids"
-                    iconName="human-child" />
-                <CategoryListItem
-                    itemName="Home & Living"
-                    iconName="home" />
-                <CategoryListItem
-                    itemName="Gadgets"
-                    iconName="headphones" />
+                {this.renderCategoryItems(categories)}
           </View>
         );
     }

@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     swiperWrapper: {
-        height: 450
+        height: 440
     },
     swiperSlide: {
         flex: 1,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     productTitle: {
         fontSize: 18,
         fontWeight: "700",
-        paddingBottom: 8,
+        paddingBottom: 4,
         color: "#000000"
     },
     productSize: {
@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
     productPrice: {
         fontSize: 18,
         fontWeight: "500",
-        color: "#000000"
+        color: "#000000",
+        paddingBottom: 4
     },
     sizeContainer: {
         flex: 1,
@@ -121,24 +122,18 @@ const styles = StyleSheet.create({
     circularCont: {
         width: 40,
         height: 40,
-        borderTopWidth: 1,
-        borderRightWidth: 1,
-        borderBottomWidth: 1,
-        borderLeftWidth: 1,
-        borderTopColor: "#999999",
-        borderRightColor: "#999999",
-        borderBottomColor: "#999999",
-        borderLeftColor: "#999999",
+        borderWidth: 1,
+        borderColor: "#999999",
         borderRadius: 50,
         alignItems: "center",
         justifyContent: "center",
         marginRight: 16
     },
     activeSize: {
-        borderTopColor: "#11cda7",
-        borderRightColor: "#11cda7",
-        borderBottomColor: "#11cda7",
-        borderLeftColor: "#11cda7",
+        borderColor: "#11cda7",
+    },
+    activeSizeText: {
+        color: "#11cda7"
     },
     productDetailsTitle: {
         fontSize: 18,

@@ -9,31 +9,36 @@ const defaultProps = {
 
 class ProductSize extends Component<{}> {
 
+    renderSizeAlias = (size) => {
+        switch (size) {
+            case "small":
+                return "S";
+            case "medium":
+                return "M";
+            case "large":
+                return "L";
+            case "extra-large":
+                return "XL";
+        }
+    }
+
+    renderSizeButton = (sizeAvailable) => {
+        return sizeAvailable.map(size => (
+            <TouchableOpacity key={size} onPress={()=> this.props.handleProductSize(size)}>
+                <View style={[styles.circularCont, this.props.size === size ? styles.activeSize: {}]}>
+                    <Text style={this.props.size === size ? styles.activeSizeText: {}}>{this.renderSizeAlias(size)}</Text>
+                </View>
+            </TouchableOpacity>
+        ));
+    }
+
     render() {
+        const {sizeAvailable} = this.props;
         return (
           <View style={styles.productDetailContainer}>
               <Text style={styles.productSize}>Size</Text>
               <View style={styles.sizeContainer}>
-                  <TouchableOpacity onPress={()=> this.props.handleProductSize("small")}>
-                      <View style={[styles.circularCont, this.props.size === "small" ? styles.activeSize: {}]}>
-                          <Text>S</Text>
-                      </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=> this.props.handleProductSize("medium")}>
-                      <View style={[styles.circularCont, this.props.size === "medium" ? styles.activeSize: {}]}>
-                          <Text>M</Text>
-                      </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=> this.props.handleProductSize("large")}>
-                      <View style={[styles.circularCont, this.props.size === "large" ? styles.activeSize: {}]}>
-                          <Text>L</Text>
-                      </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=> this.props.handleProductSize("extraLarge")}>
-                      <View style={[styles.circularCont, this.props.size === "extraLarge" ? styles.activeSize: {}]}>
-                          <Text>XL</Text>
-                      </View>
-                  </TouchableOpacity>
+                  {this.renderSizeButton(sizeAvailable)}
               </View>
           </View>
         );
