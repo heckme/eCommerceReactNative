@@ -27,6 +27,7 @@ class ProductDetails extends Component<{}> {
         this.state = {
             size: "",
             isProductAddedToCart: false,
+            isFlipped: false,
             flipValue: new Animated.Value(0)
         }
     }
@@ -41,6 +42,17 @@ class ProductDetails extends Component<{}> {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        const {product} = this.props;
+        const isProduct = _.some(nextProps.productsInCart, product);
+        if(!isProduct) {
+            this._flipButton(0);
+            this.setState({
+                isProductAddedToCart: false
+            });
+        }
+    }
+
     getProductSize = (size) => {
         this.setState({
             size
@@ -49,22 +61,23 @@ class ProductDetails extends Component<{}> {
 
     saveProductToCart = () => {
         if (!this.state.isProductAddedToCart) {
-            this._flipButton();
             const {product} = this.props;
             this.props.saveToCart(product);
+            this._flipButton();
             this.setState({
-                isProductAddedToCart: true
+                isProductAddedToCart: true,
+                isFlipped: true
             });
         } else {
             navigateTo("cartDetails");
         }
     }
 
-    _flipButton = () => {
+    _flipButton = (toValue = 1) => {
         Animated.timing(
             this.state.flipValue,
             {
-              toValue: 1,
+              toValue: toValue,
               duration: 275,
               easing: Easing.linear
             }
@@ -73,6 +86,7 @@ class ProductDetails extends Component<{}> {
 
     render() {
         const {product} = this.props;
+        const {isFlipped, isProductAddedToCart} = this.state;
         const spin = this.state.flipValue.interpolate({
             inputRange: [0, 1],
             outputRange: ['0deg', '180deg']
@@ -85,11 +99,21 @@ class ProductDetails extends Component<{}> {
                       size={32}
                       color="#000000"
                       onPress={navigateBack}/>
+                  <View style={styles.toolbarUtils}>
+                      <Text style={styles.appTitle}>Product Details</Text>
+                  </View>
               </Toolbar>
               <ScrollView>
                   <ImageSwiper images={product.coverImages}/>
-                  <ProductTitlePrice price={product.productPrice} desc={product.productDesc} title={product.productBrand} />
-                  <ProductSize sizeAvailable={product.sizeAvailable} handleProductSize={this.getProductSize} size={this.state.size}/>
+                  <ProductTitlePrice
+                      price={product.productPrice}
+                      desc={product.productDesc}
+                      name={product.productName}
+                      brand={product.productBrand} />
+                  <ProductSize
+                      sizeAvailable={product.sizeAvailable}
+                      handleProductSize={this.getProductSize}
+                      size={this.state.size}/>
                   <ProductSummary summary={product.productSummary}/>
                   <View style={styles.bottomGapInScrollView} />
               </ScrollView>
@@ -100,7 +124,7 @@ class ProductDetails extends Component<{}> {
                           <Col>
                               <FlexButton
                                   name={this.state.isProductAddedToCart ? "Go to Bag" : "Add to Bag"}
-                                  style={[{backgroundColor: "#11cda7"}, {transform: [{rotateX: this.state.isProductAddedToCart ?"180deg" : "0deg"}]}]}
+                                  style={[{backgroundColor: "#11cda7"}, {transform: [{rotateX: (isFlipped && isProductAddedToCart) ?"180deg" : "0deg"}]}]}
                                   iconName="shopping-bag"
                                   iconSize={18}
                                   iconColor="#ffffff"

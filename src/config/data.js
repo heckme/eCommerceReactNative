@@ -2,6 +2,7 @@ export default [
   {
     id: 0,
     productBrand: "Luis Philip",
+    productName: "Women Gray Classic Fit Casual Top",
     category: "women",
     subCategory: "cloths",
     productPrice: 755,
@@ -18,6 +19,7 @@ export default [
   {
     id: 1,
     productBrand: "Luis Philip",
+    productName: "Women Gray Classic Fit Casual Top",
     category: "women",
     subCategory: "cloths",
     productPrice: 755,
@@ -34,6 +36,7 @@ export default [
   {
     id: 2,
     productBrand: "Luis Philip",
+    productName: "Women Gray Classic Fit Casual Top",
     category: "women",
     subCategory: "cloths",
     productPrice: 755,
@@ -50,6 +53,7 @@ export default [
   {
     id: 3,
     productBrand: "Luis Philip",
+    productName: "Women Gray Classic Fit Casual Top",
     category: "women",
     subCategory: "cloths",
     productPrice: 755,
@@ -66,6 +70,7 @@ export default [
   {
     id: 4,
     productBrand: "Luis Philip",
+    productName: "Women Gray Classic Fit Casual Top",
     category: "women",
     subCategory: "cloths",
     productPrice: 755,
@@ -82,6 +87,7 @@ export default [
   {
     id: 5,
     productBrand: "Luis Philip",
+    productName: "Women Gray Classic Fit Casual Top",
     category: "women",
     subCategory: "cloths",
     productPrice: 755,
@@ -98,6 +104,7 @@ export default [
   {
     id: 6,
     productBrand: "Luis Philip",
+    productName: "Women Gray Classic Fit Casual Top",
     category: "women",
     subCategory: "cloths",
     productPrice: 755,

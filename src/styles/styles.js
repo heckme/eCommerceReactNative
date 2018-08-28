@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
     },
     appTitle: {
         fontSize: 22,
-        color: "#000000",
-        fontWeight: "500"
+        color: "#000000"
     },
     menuIconContainer: {
         justifyContent: "space-around",
@@ -96,11 +95,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "#dddddd",
         backgroundColor:"#ffffff",
-        padding: 18
+        padding: 16
     },
     productTitle: {
-        fontSize: 18,
-        fontWeight: "700",
+        fontSize: 16,
         paddingBottom: 4,
         color: "#000000"
     },
@@ -263,7 +261,8 @@ const styles = StyleSheet.create({
     itemPrice: {
         paddingTop: 3,
         paddingBottom: 16,
-        fontSize: 16
+        fontSize: 16,
+        color: "#000000"
     },
     itemHeadingContainer: {
         flexDirection: "row",

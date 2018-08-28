@@ -16,7 +16,8 @@ class Sidebar extends Component<{}> {
         this.state = {
             slideValue: new Animated.Value(300),
             categories: [],
-            subCategories: []
+            subCategories: [],
+            subcategoryHeading: ""
         }
         this.isSubCategoryHidden = true;
     }
@@ -29,8 +30,9 @@ class Sidebar extends Component<{}> {
         }
     }
 
-    updateSubCategoriesList = (subCategories) => {
+    updateSubCategoriesList = (subcategoryHeading, subCategories) => {
         this.setState({
+            subcategoryHeading,
             subCategories
         });
         this._toggleSubCategory();
@@ -68,7 +70,7 @@ class Sidebar extends Component<{}> {
                             name="arrow-left"
                             size={32}
                             onPress={this._toggleSubCategory}/>
-                        <Text style={styles.categoryTitle}>Men</Text>
+                        <Text style={styles.categoryTitle}>{this.state.subcategoryHeading}</Text>
                     </View>
                     <ScrollView>
                         <SubCategoryList

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Text, View, Image, TouchableOpacity} from "react-native";
 
+import {renderCurrency} from "./../utils";
+
 import styles from "./../styles/styles";
 
 class CartItem extends Component<{}> {
@@ -14,10 +16,10 @@ class CartItem extends Component<{}> {
                       <Image resizeMode="contain" style={styles.cartImageStyle} source={require('./../assets/product_2.jpg')} />
                   </View>
                   <View style={styles.column8}>
-                      <Text style={styles.itemTitle}>FabAlley Women Gray Classic Fit Casul Top</Text>
-                      <Text style={styles.itemSoldBy}>Sold by: Funfash</Text>
+                      <Text style={styles.itemTitle}>{product.productName}</Text>
+                      <Text style={styles.itemSoldBy}>{product.productBrand}</Text>
                       <Text style={styles.itemInStock}>Only 1 units in stocks</Text>
-                      <Text style={styles.itemPrice}>$999</Text>
+                      <Text style={styles.itemPrice}>{renderCurrency()} {product.productPrice}</Text>
                   </View>
               </View>
               <View style={styles.removeCartItemCont}>

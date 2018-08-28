@@ -24,7 +24,7 @@ class CategoryList extends Component<{}> {
 
     handleUpdateSubCategoriesList = (category) => {
         if (category.subCategories.length > 0) {
-            this.props.handleUpdateSubCategoriesList(category.subCategories);
+            this.props.handleUpdateSubCategoriesList(category.categoryName, category.subCategories);
         } else {
             this.props.onPressMenuItem(category.categoryName);
         }

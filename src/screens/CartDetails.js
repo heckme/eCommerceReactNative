@@ -41,21 +41,27 @@ class CartDetails extends Component<{}> {
                         <Text style={styles.appTitle}>Bag</Text>
                     </View>
                 </Toolbar>
-                <ScrollView>
-                    <View style={styles.itemHeadingContainer}>
-                        <Text style={styles.boldText}>Items({productsInCart.length})</Text>
-                        <Text style={styles.boldText}>Total: ${this.renderTotalPrice(productsInCart)}</Text>
+                {productsInCart.length > 0 ?
+                    <ScrollView>
+                        <View style={styles.itemHeadingContainer}>
+                            <Text style={styles.boldText}>Items({productsInCart.length})</Text>
+                            <Text style={styles.boldText}>Total: ${this.renderTotalPrice(productsInCart)}</Text>
+                        </View>
+                        {this.renderCartItems(productsInCart)}
+                        <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
+                            <Text style={styles.boldText}>Price Details</Text>
+                        </View>
+                        <PriceDetails totalPrice={this.renderTotalPrice(productsInCart)} />
+                        <Button
+                            title='Place Order'
+                            backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
+                            onPress={() => navigateTo("addressDetails")}/>
+                    </ScrollView>
+                    :
+                    <View style={[styles.toolbarUtils, styles.justifyCenter]}>
+                        <Text style={styles.appTitle}>Nothing in your bag</Text>
                     </View>
-                    {this.renderCartItems(productsInCart)}
-                    <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
-                        <Text style={styles.boldText}>Price Details</Text>
-                    </View>
-                    <PriceDetails />
-                    <Button
-                        title='Place Order'
-                        backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
-                        onPress={() => navigateTo("addressDetails")}/>
-                </ScrollView>
+               }
             </View>
         );
     }
