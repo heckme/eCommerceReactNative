@@ -6,7 +6,7 @@ import { Button } from "react-native-elements";
 import Toolbar from "./../components/Toolbar";
 import CartItem from "./../components/CartItem";
 import PriceDetails from "./../components/PriceDetails";
-import {navigateTo} from "./../utils";
+import {navigateTo, renderCurrency} from "./../utils";
 import {removeFromCart} from "./../actions";
 
 import styles from "./../styles/styles";
@@ -45,7 +45,7 @@ class CartDetails extends Component<{}> {
                     <ScrollView>
                         <View style={styles.itemHeadingContainer}>
                             <Text style={styles.boldText}>Items({productsInCart.length})</Text>
-                            <Text style={styles.boldText}>Total: ${this.renderTotalPrice(productsInCart)}</Text>
+                            <Text style={styles.boldText}>Total: {renderCurrency()} {this.renderTotalPrice(productsInCart)}</Text>
                         </View>
                         {this.renderCartItems(productsInCart)}
                         <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
