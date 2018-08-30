@@ -1,42 +1,36 @@
 import {Actions, ActionConst} from "react-native-router-flux";
+import _ from "lodash";
+
 import {RUPEE} from "./../constants/currency";
 
 export const redirectTo = (scene) => {
-    if (Actions.currentScene) {
-        Actions.reset(scene);
-    }
+    if (Actions.currentScene) Actions.reset(scene);
 }
 
 export const navigateTo = (scene, props = null) => {
-    if(props) {
-        Actions.push(scene, props);
-    } else {
-        Actions[scene].call();
-    }
+    props ? Actions.push(scene, props) : Actions[scene].call();
 }
 
-export const navigateBack = () => {
-    Actions.pop();
-}
+export const navigateBack = () => Actions.pop();
+
+export const deleteObjectFromArray = (array, object) => (
+  array.filter((item) => (item.id !== object.id))
+);
+
+export const renderCurrency = () => (RUPEE);
 
 export const arrayChunking = (num, arr) => {
     const newArr = [];
     let count = 0;
-    arr.forEach((el) => {
+    arr.forEach(el => {
         if(newArr.length > 0 && count % num !== 0) {
             newArr[newArr.length - 1].push(el);
         } else {
             newArr.push([el]);
         }
         count++;
-    })
+    });
     return newArr;
 }
 
-export const deleteObjectFromArray = (array, object) => {
-    return array.filter((item) => (item.id !== object.id))
-}
-
-export const renderCurrency = () => {
-    return RUPEE;
-}
+export const calculateDiscount = (p, d) => (p * d / 100);

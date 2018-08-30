@@ -1,7 +1,9 @@
 import {connect} from "react-redux";
+import {compose} from "redux";
 import React, {Component} from "react";
-import {Text, View, ScrollView} from "react-native";
-import { Button } from 'react-native-elements';
+import {Text, View, ScrollView, TextInput} from "react-native";
+import {Button} from "react-native-elements";
+import {reduxForm, Field} from "redux-form";
 
 import Toolbar from "./../components/Toolbar";
 import InputText from "./../components/InputText";
@@ -11,62 +13,25 @@ import styles from "./../styles/styles";
 
 class AddressDetails extends Component<{}> {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            pincode: "",
-            locality: "",
-            city: "",
-            state: "",
-            name: "",
-            address: "",
-            mobile: ""
-        }
+    onSubmit = values => {
+        navigateTo("confirmOrder");
     }
 
-    onChangePin = (pincode) => {
-        this.setState({
-            pincode
-        })
+    submitForm = () => {
+        const {handleSubmit} = this.props;
+        handleSubmit(this.onSubmit);
     }
 
-    onChangeLocality = (locality) => {
-        this.setState({
-            locality
-        })
-    }
+    renderTextInput = ({placeholder, input: { onChange, ...restInput }}) => (
+        <InputText
+            onChangeText={onChange}
+            placeholder={placeholder}
+            {...restInput} />
+    );
 
-    onChangeCity = (city) => {
-        this.setState({
-            city
-        })
-    }
-
-    onChangeState = (state) => {
-        this.setState({
-            state
-        })
-    }
-
-    onChangeName = (name) => {
-        this.setState({
-            name
-        })
-    }
-
-    onChangeAddress = (address) => {
-        this.setState({
-            address
-        })
-    }
-
-    onChangeMobile = (mobile) => {
-        this.setState({
-            mobile
-        })
-    }
 
     render() {
+        const {handleSubmit} = this.props;
         return (
           <View style={styles.addressContainer}>
               <Toolbar>
@@ -79,41 +44,41 @@ class AddressDetails extends Component<{}> {
                       <Text style={styles.boldText}>Add New Address</Text>
                   </View>
                   <View style={[styles.priceDetailContainer, styles.padding16]}>
-                      <InputText
+                      <Field
+                          name="pincode"
                           placeholder="Pin Code"
-                          value={this.state.pincode}
-                          onChangeText={this.onChangePin} />
-                      <InputText
+                          component={this.renderTextInput} />
+                      <Field
+                          name="locality"
                           placeholder="Locality"
-                          value={this.state.locality}
-                          onChangeText={this.onChangeLocality} />
-                      <InputText
+                          component={this.renderTextInput} />
+                      <Field
+                          name="city"
                           placeholder="City"
-                          value={this.state.city}
-                          onChangeText={this.onChangeCity} />
-                      <InputText
+                          component={this.renderTextInput} />
+                      <Field
+                          name="state"
                           placeholder="State"
-                          value={this.state.state}
-                          onChangeText={this.onChangeState} />
+                          component={this.renderTextInput} />
                   </View>
                   <View style={[styles.priceDetailContainer, styles.padding16]}>
-                      <InputText
+                      <Field
+                          name="name"
                           placeholder="Name"
-                          value={this.state.name}
-                          onChangeText={this.onChangeName} />
-                      <InputText
+                          component={this.renderTextInput} />
+                      <Field
+                          name="streetAddress"
                           placeholder="Address"
-                          value={this.state.address}
-                          onChangeText={this.onChangeAddress} />
-                      <InputText
+                          component={this.renderTextInput} />
+                      <Field
+                          name="mobile"
                           placeholder="Mobile"
-                          value={this.state.mobile}
-                          onChangeText={this.onChangeMobile} />
+                          component={this.renderTextInput} />
                   </View>
                   <Button
                       title="Save"
                       backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
-                      onPress={() => navigateTo("confirmOrder")}/>
+                      onPress={handleSubmit(this.onSubmit)}/>
               </ScrollView>
           </View>
         );
@@ -124,4 +89,8 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddressDetails);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    reduxForm({form: "address"})
+)
+(AddressDetails);

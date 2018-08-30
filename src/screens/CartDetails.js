@@ -1,17 +1,22 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
-import {Text, View, ScrollView} from "react-native";
+import {Text, View, ScrollView, LayoutAnimation, UIManager} from "react-native";
 import { Button } from "react-native-elements";
 
 import Toolbar from "./../components/Toolbar";
 import CartItem from "./../components/CartItem";
 import PriceDetails from "./../components/PriceDetails";
-import {navigateTo, renderCurrency} from "./../utils";
+import {navigateTo, renderCurrency, calculateDiscount} from "./../utils";
 import {removeFromCart} from "./../actions";
 
 import styles from "./../styles/styles";
 
 class CartDetails extends Component<{}> {
+
+    _animate = () => {
+        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        LayoutAnimation.easeInEaseOut();
+    }
 
     renderCartItems = (productsInCart) => {
         return productsInCart.map((product) => (
@@ -23,17 +28,35 @@ class CartDetails extends Component<{}> {
     }
 
     renderTotalPrice = (productsInCart) => {
-        return productsInCart.reduce((total, product) => {
-            return total + product.productPrice
+        const discountedPrice = productsInCart.map(product => {
+            if (product.discount && product.discount > 0) {
+                const discount = calculateDiscount(product.productPrice, product.discount);
+                return Math.floor(product.productPrice - discount);
+            } else {
+                return product.productPrice;
+            }
+        });
+        return discountedPrice.reduce((total, price) => {
+            return total + price;
         }, 0)
     }
 
     removeProductFromCart = (product) => {
         this.props.removeFromCart(product);
+        this._animate();
+    }
+
+    onPlaceOrder = () => {
+        const {form} = this.props;
+        if(form && form.address && form.address.values && (Object.keys(form.address.values).length > 0)) {
+            navigateTo("confirmOrder");
+        } else {
+            navigateTo("addressDetails");
+        }
     }
 
     render() {
-        const {productsInCart} = this.props;
+        const {productsInCart, form} = this.props;
         return (
             <View  style={styles.cartContainer}>
                 <Toolbar>
@@ -51,11 +74,13 @@ class CartDetails extends Component<{}> {
                         <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
                             <Text style={styles.boldText}>Price Details</Text>
                         </View>
-                        <PriceDetails totalPrice={this.renderTotalPrice(productsInCart)} />
+                        <PriceDetails
+                            handleRenderTotalPrice={this.renderTotalPrice}
+                            productsInCart={productsInCart} />
                         <Button
                             title='Place Order'
                             backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
-                            onPress={() => navigateTo("addressDetails")}/>
+                            onPress={this.onPlaceOrder}/>
                     </ScrollView>
                     :
                     <View style={[styles.toolbarUtils, styles.justifyCenter]}>
@@ -68,7 +93,8 @@ class CartDetails extends Component<{}> {
 }
 
 const mapStateToProps = state => ({
-    productsInCart: state.cart.productsInCart
+    productsInCart: state.cart.productsInCart,
+    form: state.form
 });
 
 const mapDispatchToProps = dispatch => ({

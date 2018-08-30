@@ -6,18 +6,26 @@ import {renderCurrency} from "./../utils";
 import styles from "./../styles/styles";
 
 const defaultProps = {
-    totalPrice: 0,
-    discount: 0
+    productsInCart: []
 }
 class PriceDetails extends Component<{}> {
 
+    renderOriginalPrice = (productsInCart) => {
+        return productsInCart.reduce((total, product) => {
+            return total + product.productPrice
+        }, 0)
+    }
+
     render() {
-        const {totalPrice, discount} = this.props;
+        const {productsInCart} = this.props;
+        const totalOriginalPrice = this.renderOriginalPrice(productsInCart);
+        const totalOfferPrice = this.props.handleRenderTotalPrice(productsInCart)
+        const discount = totalOriginalPrice - totalOfferPrice;
         return (
           <View style={styles.priceDetailContainer}>
               <View style={styles.itemHeadingContainer}>
                   <Text>Bag Total</Text>
-                  <Text>{renderCurrency()} {parseFloat(totalPrice)}</Text>
+                  <Text>{renderCurrency()} {totalOriginalPrice}</Text>
               </View>
               <View style={[styles.itemHeadingContainer,  styles.borderTop]}>
                   <Text>Bag Discount</Text>
@@ -25,11 +33,11 @@ class PriceDetails extends Component<{}> {
               </View>
               <View style={[styles.itemHeadingContainer,  styles.borderTop]}>
                   <Text>Sub Total</Text>
-                  <Text>{renderCurrency()} {totalPrice - discount}</Text>
+                  <Text>{renderCurrency()} {totalOfferPrice}</Text>
               </View>
               <View style={[styles.itemHeadingContainer,  styles.borderTop]}>
                   <Text>Total Payable</Text>
-                  <Text>{renderCurrency()} {totalPrice - discount}</Text>
+                  <Text>{renderCurrency()} {totalOfferPrice}</Text>
               </View>
           </View>
         );

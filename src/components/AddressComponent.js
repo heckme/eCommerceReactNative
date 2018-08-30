@@ -4,15 +4,25 @@ import {Button} from "react-native-elements"
 
 import styles from "./../styles/styles";
 
+const defaultProps = {
+    address: {}
+}
 class AddressComponent extends Component<{}> {
 
+    onResetAddressForm = () => {
+          navigateTo("addressDetails");
+    }
+
     render() {
+        const {address} = this.props;
         return (
             <View style={[styles.priceDetailContainer]}>
-                <Text style={styles.addressText}>445 Mount Eden Road, Mount Eden, Auckland, 21 Greens Road RD 2 Ruawai 0592, Main Highway Otaki; 32 Wilson Street, PO Box 39100, Howick</Text>
+                <Text style={styles.addressText}>
+                    {address.streetAddress}, {address.locality}, {address.city}, {address.pincode}, {address.state}
+                </Text>
                 <View style={[styles.rowContainer, {justifyContent: "space-between", paddingTop: 16, paddingBottom: 16}]}>
                     <Button
-                        onPress={() => {}}
+                        onPress={this.props.handleEditAddress}
                         title="Edit Address"
                         backgroundColor="#efefef"
                         raised
@@ -20,7 +30,7 @@ class AddressComponent extends Component<{}> {
                         />
 
                     <Button
-                        onPress={() => {}}
+                        onPress={this.props.handleAddNewAddress}
                         title="Add New Address"
                         backgroundColor="#efefef"
                         raised
@@ -31,5 +41,7 @@ class AddressComponent extends Component<{}> {
         );
     }
 }
+
+AddressComponent.defaultProps = defaultProps;
 
 export default AddressComponent;

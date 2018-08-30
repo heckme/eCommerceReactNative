@@ -107,6 +107,7 @@ class ProductDetails extends Component<{}> {
                   <ImageSwiper images={product.coverImages}/>
                   <ProductTitlePrice
                       price={product.productPrice}
+                      discount={product.discount}
                       desc={product.productDesc}
                       name={product.productName}
                       brand={product.productBrand} />

@@ -64,25 +64,40 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     cardContainer: {
-        marginTop: 8,
-        marginLeft: 4,
-        marginRight: 4,
-        marginBottom: 0
+        marginTop:0,
+        marginLeft: 0,
+        marginRight: 0,
+        marginBottom: 0,
+        borderWidth: 0,
+        borderRightWidth: 1,
+        borderBottomWidth: 1
     },
     cardTextTitle: {
-        marginBottom: 4,
-        fontSize: 16,
+        marginBottom: 2,
+        fontSize: 14,
         color: "#000",
     },
     cardTextSubtitle: {
-        marginBottom: 4,
-        fontSize: 16,
+        marginBottom: 2,
+        fontSize: 14,
         color: "#000",
-        fontWeight: "500"
+        fontWeight: "500",
+        paddingRight: 4
+    },
+    cardTextOriginalPrice: {
+        marginBottom: 2,
+        fontSize: 11,
+        color: "#666",
+        paddingRight: 4
+    },
+    lineThrough: {
+        textDecorationLine: 'line-through'
+    },
+    redColorText: {
+        color: "#ff5722"
     },
     cardTextDesc: {
-        marginBottom: 8,
-        fontSize: 14,
+        fontSize: 12,
     },
     swiperWrapper: {
         height: 440
@@ -98,8 +113,8 @@ const styles = StyleSheet.create({
         padding: 16
     },
     productTitle: {
-        fontSize: 16,
-        paddingBottom: 4,
+        fontSize: 14,
+        paddingBottom: 2,
         color: "#000000"
     },
     productSize: {
