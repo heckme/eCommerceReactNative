@@ -6,7 +6,7 @@ import { Button } from "react-native-elements";
 import Toolbar from "./../components/Toolbar";
 import CartItem from "./../components/CartItem";
 import PriceDetails from "./../components/PriceDetails";
-import {navigateTo, renderCurrency, calculateDiscount} from "./../utils";
+import {navigateTo, renderCurrency, calculateDiscount, renderOfferPrice, renderOriginalPrice} from "./../utils";
 import {removeFromCart} from "./../actions";
 
 import styles from "./../styles/styles";
@@ -27,28 +27,14 @@ class CartDetails extends Component<{}> {
         ));
     }
 
-    renderTotalPrice = (productsInCart) => {
-        const discountedPrice = productsInCart.map(product => {
-            if (product.discount && product.discount > 0) {
-                const discount = calculateDiscount(product.productPrice, product.discount);
-                return Math.floor(product.productPrice - discount);
-            } else {
-                return product.productPrice;
-            }
-        });
-        return discountedPrice.reduce((total, price) => {
-            return total + price;
-        }, 0)
-    }
-
     removeProductFromCart = (product) => {
         this.props.removeFromCart(product);
         this._animate();
     }
 
     onPlaceOrder = () => {
-        const {form} = this.props;
-        if(form && form.address && form.address.values && (Object.keys(form.address.values).length > 0)) {
+        const {deliveryAddress} = this.props;
+        if(deliveryAddress && deliveryAddress.address && (Object.keys(deliveryAddress.address).length > 0)) {
             navigateTo("confirmOrder");
         } else {
             navigateTo("addressDetails");
@@ -68,14 +54,15 @@ class CartDetails extends Component<{}> {
                     <ScrollView>
                         <View style={styles.itemHeadingContainer}>
                             <Text style={styles.boldText}>Items({productsInCart.length})</Text>
-                            <Text style={styles.boldText}>Total: {renderCurrency()} {this.renderTotalPrice(productsInCart)}</Text>
+                            <Text style={styles.boldText}>Total: {renderCurrency()} {renderOfferPrice(productsInCart)}</Text>
                         </View>
                         {this.renderCartItems(productsInCart)}
                         <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
                             <Text style={styles.boldText}>Price Details</Text>
                         </View>
                         <PriceDetails
-                            handleRenderTotalPrice={this.renderTotalPrice}
+                            handleRenderOfferPrice={renderOfferPrice}
+                            handleRenderOriginalPrice={renderOriginalPrice}
                             productsInCart={productsInCart} />
                         <Button
                             title='Place Order'
@@ -94,7 +81,7 @@ class CartDetails extends Component<{}> {
 
 const mapStateToProps = state => ({
     productsInCart: state.cart.productsInCart,
-    form: state.form
+    deliveryAddress: state.deliveryAddress
 });
 
 const mapDispatchToProps = dispatch => ({

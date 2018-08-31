@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import {Text, View, ScrollView} from "react-native";
 import { Button } from "react-native-elements";
 
-import {navigateTo, calculateDiscount} from "./../utils";
+import {navigateTo, calculateDiscount, renderOfferPrice} from "./../utils";
 import FlexButton from "./../components/FlexButton";
 import AddressComponent from "./../components/AddressComponent";
 import DeliveryEstimate from "./../components/DeliveryEstimate";
@@ -16,30 +16,16 @@ import styles from "./../styles/styles";
 class ConfirmOrder extends Component<{}> {
 
     onEditAddress = () => {
-        navigateTo("addressDetails");
+        navigateTo("addressDetails", {isEditAddress: true});
     }
 
     onAddNewAddress = () => {
         this.props.resetAddressForm();
-        navigateTo("addressDetails");
-    }
-
-    renderTotalPrice = (productsInCart) => {
-        const discountedPrice = productsInCart.map(product => {
-            if (product.discount && product.discount > 0) {
-                const discount = calculateDiscount(product.productPrice, product.discount);
-                return Math.floor(product.productPrice - discount);
-            } else {
-                return product.productPrice;
-            }
-        });
-        return discountedPrice.reduce((total, price) => {
-            return total + price;
-        }, 0)
+        navigateTo("addressDetails", {isEditAddress: false});
     }
 
     render() {
-        const {productsInCart, form: {address}} = this.props;
+        const {deliveryAddress: {address}, productsInCart,} = this.props;
         return (
             <View style={styles.confirmContainer}>
                 <Toolbar>
@@ -54,7 +40,7 @@ class ConfirmOrder extends Component<{}> {
                     <AddressComponent
                         handleAddNewAddress={this.onAddNewAddress}
                         handleEditAddress={this.onEditAddress}
-                        address={address ? address.values : ""} />
+                        address={address ? address : ""} />
                     <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
                         <Text style={styles.boldText}>Estimated Delivery Time</Text>
                     </View>
@@ -62,7 +48,7 @@ class ConfirmOrder extends Component<{}> {
                     <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
                         <Text style={styles.boldText}>Order Summery</Text>
                     </View>
-                    <OrderSummery totalItems={productsInCart.length} totalPrice={this.renderTotalPrice(productsInCart)} />
+                    <OrderSummery totalItems={productsInCart.length} totalPrice={renderOfferPrice(productsInCart)} />
                     <Button
                         title="Comfirm Order"
                         backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
@@ -75,7 +61,7 @@ class ConfirmOrder extends Component<{}> {
 
 const mapStateToProps = state => ({
     productsInCart: state.cart.productsInCart,
-    form: state.form
+    deliveryAddress: state.deliveryAddress
 });
 
 const mapDispatchToProps = dispatch => ({

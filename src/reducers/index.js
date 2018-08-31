@@ -5,12 +5,15 @@ import {RESET_ADDRESS_FORM} from "./../constants/action-types";
 
 import app from "./appReducer";
 import cart from "./cartReducer";
+import deliveryAddress from "./addressReducer";
 
 const reducers = {
     app,
     cart,
+    deliveryAddress,
     form: formReducer.plugin({
         address: (state, action) => {
+
             switch(action.type) {
 
                 case RESET_ADDRESS_FORM:

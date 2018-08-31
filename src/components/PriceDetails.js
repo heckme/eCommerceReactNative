@@ -10,16 +10,10 @@ const defaultProps = {
 }
 class PriceDetails extends Component<{}> {
 
-    renderOriginalPrice = (productsInCart) => {
-        return productsInCart.reduce((total, product) => {
-            return total + product.productPrice
-        }, 0)
-    }
-
     render() {
         const {productsInCart} = this.props;
-        const totalOriginalPrice = this.renderOriginalPrice(productsInCart);
-        const totalOfferPrice = this.props.handleRenderTotalPrice(productsInCart)
+        const totalOriginalPrice = this.props.handleRenderOriginalPrice(productsInCart);
+        const totalOfferPrice = this.props.handleRenderOfferPrice(productsInCart);
         const discount = totalOriginalPrice - totalOfferPrice;
         return (
           <View style={styles.priceDetailContainer}>

@@ -8,12 +8,14 @@ import {reduxForm, Field} from "redux-form";
 import Toolbar from "./../components/Toolbar";
 import InputText from "./../components/InputText";
 import {navigateTo} from "./../utils";
+import {setAddress} from "./../actions";
 
 import styles from "./../styles/styles";
 
 class AddressDetails extends Component<{}> {
 
     onSubmit = values => {
+        this.props.setAddress(values);
         navigateTo("confirmOrder");
     }
 
@@ -85,12 +87,16 @@ class AddressDetails extends Component<{}> {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state, ownProps) => ({
+    initialValues: ownProps.isEditAddress ? state.deliveryAddress.address: {}
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    setAddress: payload => dispatch(setAddress(payload))
+});
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    reduxForm({form: "address"})
+    reduxForm({form: "address", destroyOnUnmount: false})
 )
 (AddressDetails);

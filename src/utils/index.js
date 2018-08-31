@@ -34,3 +34,23 @@ export const arrayChunking = (num, arr) => {
 }
 
 export const calculateDiscount = (p, d) => (p * d / 100);
+
+export const renderOfferPrice = (productsInCart) => {
+    const discountedPrice = productsInCart.map(product => {
+        if (product.discount && product.discount > 0) {
+            const discount = calculateDiscount(product.productPrice, product.discount);
+            return Math.floor(product.productPrice - discount);
+        } else {
+            return product.productPrice;
+        }
+    });
+    return discountedPrice.reduce((total, price) => {
+        return total + price;
+    }, 0)
+}
+
+export const renderOriginalPrice = (productsInCart) => {
+    return productsInCart.reduce((total, product) => {
+        return total + product.productPrice
+    }, 0)
+}

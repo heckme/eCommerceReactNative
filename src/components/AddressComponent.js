@@ -7,11 +7,8 @@ import styles from "./../styles/styles";
 const defaultProps = {
     address: {}
 }
-class AddressComponent extends Component<{}> {
 
-    onResetAddressForm = () => {
-          navigateTo("addressDetails");
-    }
+class AddressComponent extends Component<{}> {
 
     render() {
         const {address} = this.props;

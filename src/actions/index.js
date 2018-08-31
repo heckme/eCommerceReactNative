@@ -3,7 +3,8 @@ import {
     REMOVE_FROM_CART,
     HANDLE_CHANGE,
     INIT_ADDRESS_FORM,
-    RESET_ADDRESS_FORM
+    RESET_ADDRESS_FORM,
+    SET_ADDRESS
 } from "./../constants/action-types";
 
 export const saveToCart = payload => ({type: SAVE_TO_CART, payload})
@@ -15,3 +16,5 @@ export const handleChange = payload => ({type: HANDLE_CHANGE, payload})
 export const initAddressFrom = payload => ({type: INIT_ADDRESS_FORM, payload})
 
 export const resetAddressForm = () => ({type: RESET_ADDRESS_FORM})
+
+export const setAddress = payload => ({type: SET_ADDRESS, payload})
