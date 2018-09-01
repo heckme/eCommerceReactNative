@@ -33,7 +33,7 @@ class ProductCatlog extends Component<{}> {
         return (
             <View style={styles.dashboardContainer}>
                 <Toolbar>
-                    <MenuIcon name="arrow-left" size={32} onPress={navigateBack}/>
+                    <MenuIcon name="arrow-left" size={24} onPress={navigateBack}/>
                     <View style={styles.toolbarUtils}>
                         <Text style={styles.appTitle}>Product Catlog</Text>
                     </View>

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     appTitle: {
-        fontSize: 22,
+        fontSize: 18,
         color: "#000000"
     },
     menuIconContainer: {
@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fefefe",
     },
+    profileContainer: {
+        flex: 1,
+        backgroundColor: "#fefefe",
+    },
     toolbarContainer: {
         height: 56,
         backgroundColor: "#fefefe",
@@ -49,10 +53,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flex: 1,
         alignItems: "center",
-        paddingRight: 16
+        paddingRight: 8
     },
     utilsIconCont: {
-        width: 85
+        width: 90
+    },
+    utilsIcon: {
+        width: 45,
+        justifyContent:"center",
+        alignItems: "center",
+        paddingVertical: 8
     },
     justifyCenter: {
         justifyContent: "center",
@@ -326,10 +336,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32 ,
         justifyContent: "center"
     },
+    userNameCont: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 16
+    },
     userNameText: {
         fontSize: 18,
-        color: "#fff",
-        paddingTop: 16
+        color: "#fff"
     },
     paddingTop8: {
         paddingTop: 24
@@ -378,6 +392,9 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(255, 255, 255, 0.7)",
         zIndex: 1,
         elevation: 0
+    },
+    userDetailsCont: {
+        flex: 1
     }
 });
 

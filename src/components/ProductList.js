@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Text, View, ScrollView, TouchableOpacity, Dimensions} from "react-native";
 import {Col, Row, Grid} from "react-native-easy-grid";
 import {Card, ListItem, Button, Divider, SearchBar} from "react-native-elements";
+import _ from "lodash";
 
 import {arrayChunking, renderCurrency, calculateDiscount} from "./../utils";
 
@@ -74,13 +75,14 @@ class ProductList extends Component<{}> {
           </TouchableOpacity>
         )
     }
+
     renderProductList = () => {
         const {data} = this.props;
-        const dataCopy = JSON.parse(JSON.stringify(data));
-        if(dataCopy.length % 2 !== 0) {
-          dataCopy.push("");
+        const activeProducts = _.filter(data, ['isActive', true]);
+        if (activeProducts.length % 2 !== 0) {
+            activeProducts.push("");
         }
-        return arrayChunking(2, dataCopy).map((productList, index) => (
+        return arrayChunking(2, activeProducts).map((productList, index) => (
             <Grid key={index}>
                 {
                     productList.map((product, i) => (

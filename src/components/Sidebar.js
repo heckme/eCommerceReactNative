@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import {Text, View, ScrollView, Animated, TouchableNativeFeedback} from "react-native";
+import {Text, View, ScrollView, Animated} from "react-native";
 import {Icon} from "react-native-elements";
 
 import MenuIcon from "./MenuIcon";
-import UserInformation from "./UserInformation";
+import SidebarHeader from "./SidebarHeader";
 import CategoryList from "./CategoryList";
 import SubCategoryList from "./SubCategoryList";
 
@@ -34,31 +34,30 @@ class Sidebar extends Component<{}> {
         this.setState({
             subcategoryHeading,
             subCategories
+        }, () => {
+            this._toggleSubCategory();
         });
-        this._toggleSubCategory();
     }
 
     _toggleSubCategory = () => {
-          let toValue = 300;
-
-          if(this.isSubCategoryHidden) toValue = 0;
-
-          Animated.timing(
-              this.state.slideValue,
-              {
-                toValue: toValue,
-                duration: 250
-              }
-          ).start();
-
-          this.isSubCategoryHidden = !this.isSubCategoryHidden;
+        let toValue = 300;
+        if(this.isSubCategoryHidden) toValue = 0;
+        Animated.timing(
+            this.state.slideValue,
+            {
+              toValue: toValue,
+              duration: 250
+            }
+        ).start();
+        this.isSubCategoryHidden = !this.isSubCategoryHidden;
     }
 
     render() {
         return (
             <View style={styles.sidebarContainer}>
                 <ScrollView>
-                    <UserInformation />
+                    <SidebarHeader
+                        handleNavigateToUserProfile={this.props.handleNavigateToUserProfile}/>
                     <CategoryList
                         handleUpdateSubCategoriesList={this.updateSubCategoriesList}
                         categories={this.state.categories}
@@ -68,7 +67,7 @@ class Sidebar extends Component<{}> {
                     <View style={styles.subCatHeader}>
                         <MenuIcon
                             name="arrow-left"
-                            size={32}
+                            size={24}
                             onPress={this._toggleSubCategory}/>
                         <Text style={styles.categoryTitle}>{this.state.subcategoryHeading}</Text>
                     </View>

@@ -31,9 +31,8 @@ class AddressDetails extends Component<{}> {
             {...restInput} />
     );
 
-
     render() {
-        const {handleSubmit} = this.props;
+        const {handleSubmit, isEditAddress} = this.props;
         return (
           <View style={styles.addressContainer}>
               <Toolbar>
@@ -97,6 +96,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    reduxForm({form: "address", destroyOnUnmount: false})
+    reduxForm({form: "address"})
 )
 (AddressDetails);

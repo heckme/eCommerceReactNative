@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
-import {Text, View, TouchableOpacity, DrawerLayoutAndroid} from "react-native";
+import {Text, View, TouchableOpacity, DrawerLayoutAndroid, LayoutAnimation, UIManager} from "react-native";
 import {SearchBar, Icon} from "react-native-elements";
 
 import ProductList from "./../components/ProductList";
@@ -34,6 +34,11 @@ class Dashboard extends Component<{}> {
         console.log("text changed");
     }
 
+    _animate = () => {
+        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        LayoutAnimation.easeInEaseOut();
+    }
+
     onClearSearch = () => {
         console.log("search clear");
     }
@@ -47,10 +52,16 @@ class Dashboard extends Component<{}> {
         navigateTo("productDetails", {product});
     }
 
+    navigateToUserProfile = () => {
+        this.closeDrawer();
+        navigateTo("userProfile");
+    }
+
     toggleSearchbar = () => {
         this.setState({
             showSearchbar: !this.state.showSearchbar
-        })
+        });
+        this._animate();
     }
 
     openDrawer = () => {
@@ -62,7 +73,15 @@ class Dashboard extends Component<{}> {
     }
 
     render() {
-        const navigationView = (<Sidebar categories={this.state.categories} onPressMenuItem={this.navigateToProductCatlog}/>);
+
+        const navigationView = (
+            <Sidebar
+                categories={this.state.categories}
+                handleCloseDrawer={this.closeDrawer}
+                handleNavigateToUserProfile={this.navigateToUserProfile}
+                onPressMenuItem={this.navigateToProductCatlog} />
+        );
+
         return (
           <DrawerLayoutAndroid
               drawerWidth={300}
@@ -71,23 +90,27 @@ class Dashboard extends Component<{}> {
               renderNavigationView={() => navigationView}>
               <View style={styles.dashboardContainer}>
                   <Toolbar>
-                      <MenuIcon name="menu" size={36} onPress={this.openDrawer}/>
+                      <MenuIcon name="menu" size={24} onPress={this.openDrawer}/>
                       <View style={styles.toolbarUtils}>
                           <Text style={styles.appTitle}>E-Com</Text>
                           <View style={[styles.rowContainer, styles.utilsIconCont, styles.justifySpaceBetween]}>
                               <TouchableOpacity onPress={this.toggleSearchbar}>
-                                  <Icon
-                                      name={!this.state.showSearchbar ? "magnify" : "close"}
-                                      type="material-community"
-                                      size={32}
-                                      color="#000000"/>
+                                <View style={styles.utilsIcon}>
+                                    <Icon
+                                        name={!this.state.showSearchbar ? "magnify" : "close"}
+                                        type="material-community"
+                                        size={24}
+                                        color="#000000"/>
+                                </View>
                               </TouchableOpacity>
                               <TouchableOpacity onPress={() => navigateTo("cartDetails")}>
-                                  <Icon
-                                      name="cart"
-                                      type="material-community"
-                                      size={32}
-                                      color="#000000"/>
+                                  <View style={styles.utilsIcon}>
+                                      <Icon
+                                          name="cart"
+                                          type="material-community"
+                                          size={24}
+                                          color="#000000"/>
+                                  </View>
                               </TouchableOpacity>
                           </View>
                       </View>

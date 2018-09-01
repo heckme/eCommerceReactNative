@@ -96,7 +96,7 @@ class ProductDetails extends Component<{}> {
               <Toolbar>
                   <MenuIcon
                       name="arrow-left"
-                      size={32}
+                      size={24}
                       color="#000000"
                       onPress={navigateBack}/>
                   <View style={styles.toolbarUtils}>

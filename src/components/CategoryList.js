@@ -33,9 +33,9 @@ class CategoryList extends Component<{}> {
     render() {
         const {categories} = this.props;
         return (
-          <View>
+            <View>
                 {this.renderCategoryItems(categories)}
-          </View>
+            </View>
         );
     }
 }
