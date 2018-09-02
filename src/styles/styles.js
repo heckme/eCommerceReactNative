@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
     paddingTop8: {
         paddingTop: 24
     },
-    listzItemContainer: {
+    listItemContainer: {
         paddingVertical: 12,
         paddingHorizontal: 24
     },
@@ -379,10 +379,20 @@ const styles = StyleSheet.create({
     },
     subCatListItem: {
         fontSize: 16,
-        paddingVertical: 16,
-        borderBottomColor: "#dddddd",
+        paddingHorizontal: 32,
+        color: "#333333",
+    },
+    subCategoryItemHeight:  {
+        height: 60,
+        justifyContent: "center",
+        borderBottomColor: "#eeeeee",
         borderBottomWidth: 1,
-        paddingHorizontal: 32
+        backgroundColor: "#ffffff"
+    },
+    subCatTwoListItem: {
+        fontSize: 16,
+        paddingLeft: 48,
+        color: "#666666"
     },
     stickyToolbar: {
         position: "absolute",
@@ -395,6 +405,26 @@ const styles = StyleSheet.create({
     },
     userDetailsCont: {
         flex: 1
+    },
+    iconPadding: {
+        paddingHorizontal : 8
+    },
+    boldText: {
+      fontWeight: "500"
+    },
+    relativeCont: {
+      position: "relative"
+    },
+    listCaretIcon: {
+      position: "absolute",
+      right: 16,
+      top: 0,
+      bottom: 0
+    },
+    listItemActive: {
+        position: "absolute",
+        zIndex: -1,
+        top: 60
     }
 });
 

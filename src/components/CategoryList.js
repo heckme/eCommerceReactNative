@@ -23,10 +23,10 @@ class CategoryList extends Component<{}> {
     }
 
     handleUpdateSubCategoriesList = (category) => {
-        if (category.subCategories.length > 0) {
+        if (category.hasOwnProperty("subCategories") && category.subCategories.length > 0) {
             this.props.handleUpdateSubCategoriesList(category.categoryName, category.subCategories);
         } else {
-            this.props.onPressMenuItem(category.categoryName);
+            this.props.onPressMenuItem(category.categoryAlias);
         }
     }
 

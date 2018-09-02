@@ -25,7 +25,6 @@ class AddressComponent extends Component<{}> {
                         raised
                         textStyle={{color: "#000000"}}
                         />
-
                     <Button
                         onPress={this.props.handleAddNewAddress}
                         title="Add New Address"

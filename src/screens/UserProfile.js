@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
-import {Text, View} from "react-native";
-import {Avatar} from "react-native-elements";
+import {Text, View, TouchableNativeFeedback} from "react-native";
+import {Avatar, List, ListItem, Icon} from "react-native-elements";
 
 import Toolbar from "./../components/Toolbar";
 import MenuIcon from "./../components/MenuIcon";
@@ -12,6 +12,18 @@ import styles from "./../styles/styles";
 class UserProfile extends Component<{}> {
 
     render() {
+        const list = [
+            {
+              name: "My Orders",
+              icon: (<Icon
+                        containerStyle={styles.iconPadding}
+                        name="package-variant"
+                        type="material-community"
+                        size={32}
+                        color='#cccccc'/>
+                  )
+            }
+        ]
         return (
             <View style={styles.profileContainer}>
                 <Toolbar>
@@ -32,6 +44,17 @@ class UserProfile extends Component<{}> {
                             <Text style={styles.userNameText}>Vineet Mishra</Text>
                         </View>
                     </View>
+                    <List containerStyle={{marginBottom: 20}}>
+                        {
+                          list.map((l) => (
+                            <TouchableNativeFeedback  onPress={() => navigateTo("myOrders")} key={l.name}>
+                                <ListItem
+                                    leftIcon={l.icon}
+                                    title={l.name} />
+                            </TouchableNativeFeedback>
+                          ))
+                        }
+                    </List>
                 </View>
             </View>
         );

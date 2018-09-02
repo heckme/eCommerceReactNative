@@ -17,7 +17,7 @@ class CategoryListItem extends Component<{}> {
     render() {
         return (
             <TouchableNativeFeedback onPress={this.props.onPress}>
-                <View style={[styles.flexRow, styles.alignCenter, styles.listzItemContainer, this.props.style]}>
+                <View style={[styles.flexRow, styles.alignCenter, styles.listItemContainer, this.props.style]}>
                     <Icon
                         name={this.props.iconName}
                         type="material-community"
