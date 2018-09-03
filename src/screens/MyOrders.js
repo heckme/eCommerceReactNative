@@ -29,6 +29,7 @@ class MyOrders extends Component<{}> {
                         backgroundColor="#efefef"
                         raised
                         textStyle={{color: "#000000"}}
+                        
                         title="Start Shopping"
                         onPress={() => navigateTo("dashboard")} />
                 </View>
