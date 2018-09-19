@@ -106,15 +106,17 @@ class ProductDetails extends Component<{}> {
               <ScrollView>
                   <ImageSwiper images={product.coverImages}/>
                   <ProductTitlePrice
-                      price={product.productPrice}
+                      price={product.price}
                       discount={product.discount}
                       desc={product.productDesc}
                       name={product.productName}
-                      brand={product.productBrand} />
-                  <ProductSize
-                      sizeAvailable={product.sizeAvailable}
-                      handleProductSize={this.getProductSize}
-                      size={this.state.size}/>
+                      brand={product.category} />
+                  {product.sizeAvailable.length > 0 && 
+                      <ProductSize
+                          sizeAvailable={product.sizeAvailable}
+                          handleProductSize={this.getProductSize}
+                          size={this.state.size}/>
+                  }
                   <ProductSummary summary={product.productSummary}/>
                   <View style={styles.bottomGapInScrollView} />
               </ScrollView>

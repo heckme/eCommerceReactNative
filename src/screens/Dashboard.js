@@ -3,6 +3,8 @@ import React, {Component} from "react";
 import {Text, View, TouchableOpacity, DrawerLayoutAndroid, LayoutAnimation, UIManager} from "react-native";
 import {SearchBar, Icon} from "react-native-elements";
 
+import {api} from "./../services/api";
+import {GET_CATEGORIES_URL, GET_PRODUCTS_URL} from "./../constants/urls";
 import ProductList from "./../components/ProductList";
 import Sidebar from "./../components/Sidebar";
 import Toolbar from "./../components/Toolbar";
@@ -25,9 +27,36 @@ class Dashboard extends Component<{}> {
     }
 
     componentDidMount() {
-        this.setState({
-          data, categories
-        });
+        this._fetchCategories();
+        this._fetchProductList();
+    }
+
+    _fetchCategories = async () => {
+        try {
+            const responsePromise = await api(GET_CATEGORIES_URL, "GET");
+            const response = await responsePromise.json();
+            if(response) {
+                this.setState({
+                    categories: response
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    _fetchProductList = async () => {
+        try {
+            const responsePromise = await api(GET_PRODUCTS_URL, "GET");
+            const response = await responsePromise.json();
+            if(response) {
+                this.setState({
+                    data: response
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     onSearchChange = () => {

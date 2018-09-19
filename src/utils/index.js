@@ -14,7 +14,7 @@ export const navigateTo = (scene, props = null) => {
 export const navigateBack = () => Actions.pop();
 
 export const deleteObjectFromArray = (array, object) => (
-  array.filter((item) => (item.id !== object.id))
+  array.filter((item) => (item._id !== object._id))
 );
 
 export const renderCurrency = () => (RUPEE);
@@ -37,11 +37,11 @@ export const calculateDiscount = (p, d) => (p * d / 100);
 
 export const renderOfferPrice = (productsInCart) => {
     const discountedPrice = productsInCart.map(product => {
-        if (product.discount && product.discount > 0) {
-            const discount = calculateDiscount(product.productPrice, product.discount);
-            return Math.floor(product.productPrice - discount);
+        if (parseFloat(product.discount) && parseFloat(product.discount) > 0) {
+            const discount = calculateDiscount(parseFloat(product.price), parseFloat(product.discount));
+            return Math.floor(parseFloat(product.price) - discount);
         } else {
-            return product.productPrice;
+            return parseFloat(product.price);
         }
     });
     return discountedPrice.reduce((total, price) => {
@@ -51,6 +51,6 @@ export const renderOfferPrice = (productsInCart) => {
 
 export const renderOriginalPrice = (productsInCart) => {
     return productsInCart.reduce((total, product) => {
-        return total + product.productPrice
+        return total + parseFloat(product.price)
     }, 0)
 }

@@ -23,7 +23,7 @@ class CartDetails extends Component<{}> {
             <CartItem
                 product={product}
                 handleRemoveProductFromCart={this.removeProductFromCart}
-                key={product.id}/>
+                key={product._id}/>
         ));
     }
 

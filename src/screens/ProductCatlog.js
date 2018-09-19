@@ -2,6 +2,8 @@ import {connect} from "react-redux";
 import React, {Component} from "react";
 import {Text, View} from "react-native";
 
+import {api} from "./../services/api";
+import {GET_PRODUCTS_URL} from "./../constants/urls";
 import ProductList from "./../components/ProductList";
 import Toolbar from "./../components/Toolbar";
 import MenuIcon from "./../components/MenuIcon";
@@ -20,9 +22,21 @@ class ProductCatlog extends Component<{}> {
     }
 
     componentDidMount() {
-        this.setState({
-          data
-        });
+        this._fetchProductList();
+    }
+
+    _fetchProductList = async () => {
+        try {
+            const responsePromise = await api(GET_PRODUCTS_URL, "GET");
+            const response = await responsePromise.json();
+            if(response) {
+                this.setState({
+                    data: response
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     navigateToProductDetails = (product) => {

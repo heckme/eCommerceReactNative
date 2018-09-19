@@ -296,6 +296,7 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
         justifyContent: "space-between"
     },
+
     boldText: {
         fontSize: 16,
         fontWeight: "500"

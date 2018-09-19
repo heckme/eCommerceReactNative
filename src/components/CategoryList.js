@@ -16,7 +16,7 @@ class CategoryList extends Component<{}> {
             <CategoryListItem
                 itemName={category.categoryName}
                 iconName={category.iconName}
-                key={category.id}
+                key={category._id}
                 style={styles.paddingTop8}
                 onPress={() => this.handleUpdateSubCategoriesList(category)} />
         ));
