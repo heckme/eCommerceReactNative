@@ -6,24 +6,34 @@ import {Avatar, List, ListItem, Icon} from "react-native-elements";
 import Toolbar from "./../components/Toolbar";
 import MenuIcon from "./../components/MenuIcon";
 import {navigateBack, navigateTo} from "./../utils";
+import {logoutUser} from "./../actions";
 
 import styles from "./../styles/styles";
 
 class UserProfile extends Component<{}> {
 
+    logoutUser = () => {
+        this.props.logoutUser(this.props.token);
+    }
+
     render() {
-        const list = [
-            {
-              name: "My Orders",
-              icon: (<Icon
-                        containerStyle={styles.iconPadding}
-                        name="package-variant"
-                        type="material-community"
-                        size={32}
-                        color='#cccccc'/>
-                  )
-            }
-        ]
+
+        const myOrderIcon = (<Icon
+                  containerStyle={styles.iconPadding}
+                  name="package-variant"
+                  type="material-community"
+                  size={32}
+                  color='#cccccc'/>
+              );
+
+        const logoutIcon = (<Icon
+                  containerStyle={styles.iconPadding}
+                  name="logout-variant"
+                  type="material-community"
+                  size={32}
+                  color='#cccccc'/>
+              );
+
         return (
             <View style={styles.profileContainer}>
                 <Toolbar>
@@ -45,15 +55,16 @@ class UserProfile extends Component<{}> {
                         </View>
                     </View>
                     <List containerStyle={{marginBottom: 20}}>
-                        {
-                          list.map((l) => (
-                            <TouchableNativeFeedback  onPress={() => navigateTo("myOrders")} key={l.name}>
-                                <ListItem
-                                    leftIcon={l.icon}
-                                    title={l.name} />
-                            </TouchableNativeFeedback>
-                          ))
-                        }
+                        <TouchableNativeFeedback  onPress={() => navigateTo("myOrders")}>
+                            <ListItem
+                                leftIcon={myOrderIcon}
+                                title="My Orders" />
+                        </TouchableNativeFeedback>
+                        <TouchableNativeFeedback  onPress={this.logoutUser}>
+                            <ListItem
+                                leftIcon={logoutIcon}
+                                title="Logout" />
+                        </TouchableNativeFeedback>
                     </List>
                 </View>
             </View>
@@ -61,8 +72,12 @@ class UserProfile extends Component<{}> {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    token: state.app.token
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    logoutUser: token => dispatch(logoutUser(token))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

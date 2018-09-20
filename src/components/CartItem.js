@@ -24,7 +24,7 @@ class CartItem extends Component<{}> {
                   </View>
                   <View style={styles.column8}>
                       <Text style={styles.itemTitle}>{product.productName}</Text>
-                      <Text style={styles.itemSoldBy}>{product.category}</Text>
+                      <Text style={styles.itemSoldBy}>{product.brand}</Text>
                       <Text style={styles.itemInStock}>Only 1 units in stocks</Text>
                       <Text style={styles.itemPrice}>{renderCurrency()} {discount ? Math.floor(parseFloat(product.price) - discount) : parseFloat(product.price)}</Text>
                   </View>

@@ -54,7 +54,7 @@ class ProductList extends Component<{}> {
                   imageProps={{resizeMode:"contain"}}
                   image={{uri:thumbnailUrl}}>
                   <Text style={styles.cardTextTitle}>
-                    {product.category}
+                    {product.brand}
                   </Text>
                   <View style={[styles.flexRow, styles.alignCenter]}>
                       <Text style={styles.cardTextSubtitle}>

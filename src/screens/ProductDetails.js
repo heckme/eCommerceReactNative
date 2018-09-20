@@ -110,8 +110,8 @@ class ProductDetails extends Component<{}> {
                       discount={product.discount}
                       desc={product.productDesc}
                       name={product.productName}
-                      brand={product.category} />
-                  {product.sizeAvailable.length > 0 && 
+                      brand={product.brand} />
+                  {product.sizeAvailable.length > 0 &&
                       <ProductSize
                           sizeAvailable={product.sizeAvailable}
                           handleProductSize={this.getProductSize}

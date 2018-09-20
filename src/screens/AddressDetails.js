@@ -19,11 +19,6 @@ class AddressDetails extends Component<{}> {
         navigateTo("confirmOrder");
     }
 
-    submitForm = () => {
-        const {handleSubmit} = this.props;
-        handleSubmit(this.onSubmit);
-    }
-
     renderTextInput = ({placeholder, input: { onChange, ...restInput }}) => (
         <InputText
             onChangeText={onChange}

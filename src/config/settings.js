@@ -1,1 +1,1 @@
-export const BASE_URL = "http://10.110.60.170:4000";
+export const BASE_URL = "https://evening-dusk-87918.herokuapp.com";

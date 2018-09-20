@@ -8,7 +8,9 @@ const defaultProps = {
     mapElement: (n) => {},
     onSubmitEditing: () => {},
     value: "",
-    placeholder: ""
+    placeholder: "",
+    keyboardType: "default",
+    secureTextEntry: false
 }
 
 class InputText extends Component<{}> {
@@ -24,8 +26,8 @@ class InputText extends Component<{}> {
                 placeholder={this.props.placeholder}
                 placeholderTextColor="rgba(0,0,0,0.8)"
                 selectionColor= "#999999"
-                autoCapitalize= "words"
-                keyboardType= "default"
+                secureTextEntry={this.props.secureTextEntry}
+                keyboardType= {this.props.keyboardType}
                 returnKeyType= "next"
                 value= {this.props.value ? this.props.value : ""}
                 onChangeText= {this.props.onChangeText}/>

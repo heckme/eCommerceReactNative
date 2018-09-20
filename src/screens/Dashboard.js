@@ -27,6 +27,7 @@ class Dashboard extends Component<{}> {
     }
 
     componentDidMount() {
+
         this._fetchCategories();
         this._fetchProductList();
     }
@@ -50,6 +51,7 @@ class Dashboard extends Component<{}> {
             const responsePromise = await api(GET_PRODUCTS_URL, "GET");
             const response = await responsePromise.json();
             if(response) {
+                            console.log(response);
                 this.setState({
                     data: response
                 });

@@ -9,15 +9,21 @@ import AddressDetails from "./../screens/AddressDetails";
 import ConfirmOrder from "./../screens/ConfirmOrder";
 import UserProfile from "./../screens/UserProfile";
 import MyOrders from "./../screens/MyOrders";
+import Login from "./../screens/Login";
+import Register from "./../screens/Register";
 
 export default class Routes extends Component<{}> {
 
 		render() {
-
+				const {isLoggedin} = this.props;
 				return(
 						<Router>
 								<Scene>
-										<Scene key="app" hideNavBar={true} initial={true} >
+										<Scene key="auth" hideNavBar={true} initial={!isLoggedin}>
+												<Scene key="login" component={Login} title="Login" />
+												<Scene key="signup" component={Register} title="Register" />
+										</Scene>
+										<Scene key="app" hideNavBar={true} initial={isLoggedin}>
 												<Scene key="dashboard" component={Dashboard} title="Dashboard" />
 												<Scene key="productCatlog" component={ProductCatlog} title="Product Catlog" />
 												<Scene key="productDetails" component={ProductDetails} title="Product Details" />

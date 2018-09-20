@@ -10,7 +10,7 @@ const defaultProps = {
 class ProductSize extends Component<{}> {
 
     renderSizeAlias = (size) => {
-        switch (size) {
+        switch (size.trim()) {
             case "small":
                 return "S";
             case "medium":
