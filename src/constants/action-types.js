@@ -6,3 +6,4 @@ export const RESET_ADDRESS_FORM = "RESET_ADDRESS_FORM";
 export const SET_ADDRESS = "SET_ADDRESS";
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
+export const AUTH_ERROR = "AUTH_ERROR";

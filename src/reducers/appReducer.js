@@ -1,9 +1,10 @@
-import {AUTHENTICATE, LOGOUT} from "./../constants/action-types";
+import {AUTHENTICATE, LOGOUT, AUTH_ERROR} from "./../constants/action-types";
 
 const initialState = {
     user: {},
     isLoggedin: false,
-    token: ""
+    token: "",
+    authError: ""
 }
 export default (state = initialState, action) => {
 
@@ -14,7 +15,8 @@ export default (state = initialState, action) => {
               ...state,
               user: action.user,
               isLoggedin: true,
-              token: action.token
+              token: action.token,
+              authError: ""
           };
 
       case LOGOUT:
@@ -22,8 +24,15 @@ export default (state = initialState, action) => {
             ...state,
             user: {},
             isLoggedin: false,
-            token: ""
-          }
+            token: "",
+            authError: ""
+          };
+
+      case AUTH_ERROR:
+          return {
+            ...state,
+            authError: action.error
+          };
 
       default:
           return state;

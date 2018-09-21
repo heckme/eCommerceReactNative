@@ -2,6 +2,8 @@ import {Actions, ActionConst} from "react-native-router-flux";
 import _ from "lodash";
 
 import {RUPEE} from "./../constants/currency";
+import {api} from "./../services/api";
+import {AUTHENTICATE, LOGOUT, AUTH_ERROR} from "./../constants/action-types";
 
 export const redirectTo = (scene) => {
     if (Actions.currentScene) Actions.reset(scene);
@@ -53,4 +55,32 @@ export const renderOriginalPrice = (productsInCart) => {
     return productsInCart.reduce((total, product) => {
         return total + parseFloat(product.price)
     }, 0)
+}
+
+export const authenticateUser = async (dispatch, payload, url) => {
+    try {
+        const response = await api(url, "POST", payload);
+        if(response.status === 200 && response.headers.get("x-auth")) {
+            const token = response.headers.get("x-auth");
+            const user = await response.json();
+            if(user) {
+                dispatch({
+                    type: AUTHENTICATE,
+                    user,
+                    token
+                });
+                //redirectTo("app");
+            } else {
+                throw new Error("Error. Please try again");
+            }
+        } else {
+            throw new Error("Invalid User");
+        }
+    } catch (e) {
+        alert(e.message);
+        dispatch({
+            type: AUTH_ERROR,
+            error: e.message
+        })
+    }
 }

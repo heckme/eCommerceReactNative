@@ -3,3 +3,4 @@ export const GET_PRODUCTS_URL = "/products/getProducts";
 
 export const LOGIN_URL = "/users/login";
 export const LOGOUT_URL = "/users/logout";
+export const REGISTER_URL = "/users/create";

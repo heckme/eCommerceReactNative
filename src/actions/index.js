@@ -6,12 +6,13 @@ import {
     RESET_ADDRESS_FORM,
     SET_ADDRESS,
     AUTHENTICATE,
-    LOGOUT
+    LOGOUT,
+    AUTH_ERROR
 } from "./../constants/action-types";
 
-import {redirectTo} from "./../utils";
+import {authenticateUser, redirectTo} from "./../utils";
 import {api} from "./../services/api";
-import {LOGIN_URL, LOGOUT_URL} from "./../constants/urls";
+import {LOGIN_URL, LOGOUT_URL, REGISTER_URL} from "./../constants/urls";
 
 export const saveToCart = payload => ({type: SAVE_TO_CART, payload})
 
@@ -25,32 +26,15 @@ export const resetAddressForm = () => ({type: RESET_ADDRESS_FORM})
 
 export const setAddress = payload => ({type: SET_ADDRESS, payload})
 
+export const registerUser = payload => {
+    return dispatch => {
+        authenticateUser(dispatch, payload, REGISTER_URL)
+    }
+}
+
 export const loginUser = payload => {
-    return async dispatch => {
-        try {
-            const response = await api(LOGIN_URL, "POST", payload);
-            if(response.status === 200 && response.headers.get("x-auth")) {
-                const token = response.headers.get("x-auth");
-                const user = await response.json();
-                if(user) {
-                    redirectTo("app");
-                    dispatch({
-                        type: AUTHENTICATE,
-                        user,
-                        token
-                    });
-                } else {
-                    throw new Error("Error. Please try again");
-                }
-            } else {
-                throw new Error("Invalid User");
-            }
-        } catch (e) {
-            alert(e);
-            dispatch({
-                type: LOGOUT
-            });
-        }
+    return dispatch => {
+        authenticateUser(dispatch, payload, LOGIN_URL)
     }
 }
 
@@ -64,14 +48,17 @@ export const logoutUser = token => {
             const headers = {
                 "x-auth": token
             }
-            console.log(token);
             const response = await api(LOGOUT_URL, "DELETE", {}, headers);
             redirectTo("auth");
             dispatch({
                 type: LOGOUT
             });
         } catch (e) {
-            alert(e.message)
+            alert(e.message);
+            dispatch({
+                type: AUTH_ERROR,
+                error: e.message
+            })
         }
     }
 }

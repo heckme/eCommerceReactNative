@@ -7,19 +7,21 @@ import {reduxForm, Field} from "redux-form";
 
 import InputText from "./../components/InputText";
 import {navigateBack} from "./../utils";
+import {registerUser} from "./../actions";
 
 import styles from "./../styles/styles";
 
 class Register extends Component<{}> {
 
     onSubmit = values => {
-        console.log(values);
+        this.props.registerUser(values);
     }
 
-    renderTextInput = ({placeholder, keyboardType, input: { onChange, ...restInput }}) => (
+    renderTextInput = ({placeholder, keyboardType, secureTextEntry, input: { onChange, ...restInput }}) => (
         <InputText
             onChangeText={onChange}
             keyboardType={keyboardType}
+            secureTextEntry={secureTextEntry}
             placeholder={placeholder}
             {...restInput} />
     );
@@ -46,6 +48,7 @@ class Register extends Component<{}> {
                     <Field
                         name="password"
                         placeholder="Password"
+                        secureTextEntry={true}
                         component={this.renderTextInput} />
                 </View>
                 <Button
@@ -59,7 +62,9 @@ class Register extends Component<{}> {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    registerUser: payload => dispatch(registerUser(payload))
+});
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
