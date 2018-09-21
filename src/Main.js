@@ -6,11 +6,13 @@ import {checkAuthentication} from "./actions";
 import Routes from "./config/Routes";
 
 import styles from "./styles/styles";
+import SplashScreen from "react-native-splash-screen";
 
 class Main extends Component<{}> {
 
     componentDidMount() {
         //this.props.checkAuthentication(this.props.token);
+        //SplashScreen.hide();
     }
 
     render() {

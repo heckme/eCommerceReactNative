@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         position:"absolute",
         alignItems: 'stretch',
         flex: 1,
-        elevation:4,
+        elevation:8,
         height: 56
     },
     bottomGapInScrollView: {
@@ -213,7 +213,6 @@ const styles = StyleSheet.create({
         paddingTop: 16,
         paddingLeft: 16,
         paddingRight: 16,
-
     },
     priceDetailContainer: {
         marginBottom: 16,
@@ -411,21 +410,34 @@ const styles = StyleSheet.create({
         paddingHorizontal : 8
     },
     boldText: {
-      fontWeight: "500"
+        fontWeight: "500"
     },
     relativeCont: {
-      position: "relative"
+        position: "relative"
     },
     listCaretIcon: {
-      position: "absolute",
-      right: 16,
-      top: 0,
-      bottom: 0
+        position: "absolute",
+        right: 16,
+        top: 0,
+        bottom: 0
     },
     listItemActive: {
         position: "absolute",
         zIndex: -1,
         top: 60
+    },
+    transparentToobar: {
+        backgroundColor: "#fefefe",
+        elevation: 0
+    },
+    heading1: {
+        fontSize: 18,
+        textAlign: "center",
+        paddingBottom: 64,
+        fontWeight: "500"
+    },
+    errorText: {
+        color: "red"
     }
 });
 

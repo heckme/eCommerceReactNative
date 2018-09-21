@@ -8,7 +8,7 @@ import reducers from "../reducers";
 const persistConfig = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ["deliveryAddress", "app"],
+    whitelist: ["deliveryAddress", "app", "cart"],
     blacklist: []
 }
 

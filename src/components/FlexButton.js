@@ -27,7 +27,7 @@ class FlexButton extends Component<{}> {
                         size={this.props.iconSize}
                         color={this.props.iconColor}/>
                   }
-                  <Text style={styles.flexButtonText}>{this.props.name}</Text>
+                  <Text style={[styles.flexButtonText, this.props.textStyle]}>{this.props.name}</Text>
               </View>
           </TouchableNativeFeedback>
         );

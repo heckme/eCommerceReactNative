@@ -11,6 +11,7 @@ import UserProfile from "./../screens/UserProfile";
 import MyOrders from "./../screens/MyOrders";
 import Login from "./../screens/Login";
 import Register from "./../screens/Register";
+import InitialScreen from "./../screens/InitialScreen";
 
 export default class Routes extends Component<{}> {
 
@@ -20,6 +21,7 @@ export default class Routes extends Component<{}> {
 						<Router>
 								<Scene>
 										<Scene key="auth" hideNavBar={true} initial={!isLoggedin}>
+												<Scene key="initialScene" component={InitialScreen} title="Initial Screen" />
 												<Scene key="login" component={Login} title="Login" />
 												<Scene key="signup" component={Register} title="Register" />
 										</Scene>

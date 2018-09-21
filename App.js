@@ -4,15 +4,20 @@ import React from "react";
 
 import Main from './src/Main';
 import store from './src/config/store';
+import SplashScreen from "react-native-splash-screen";
 
 const persist = store();
 
-const App = () => (
-    <Provider store={persist.store}>
-        <PersistGate loading={null} persistor={persist.persistor}>
-            <Main />
-        </PersistGate>
-    </Provider>
-);
+const App = () =>  {
+  //SplashScreen.show();
+  return (
+      <Provider store={persist.store}>
+          <PersistGate loading={null} persistor={persist.persistor}>
+              <Main />
+          </PersistGate>
+      </Provider>
+  );
+}
+
 
 export default App;

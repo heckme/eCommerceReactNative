@@ -9,6 +9,7 @@ const defaultProps = {
     onSubmitEditing: () => {},
     value: "",
     placeholder: "",
+    maxLength: 200,
     keyboardType: "default",
     secureTextEntry: false
 }
@@ -28,6 +29,7 @@ class InputText extends Component<{}> {
                 selectionColor= "#999999"
                 secureTextEntry={this.props.secureTextEntry}
                 keyboardType= {this.props.keyboardType}
+                maxLength= {this.props.maxLength}
                 returnKeyType= "next"
                 value= {this.props.value ? this.props.value : ""}
                 onChangeText= {this.props.onChangeText}/>

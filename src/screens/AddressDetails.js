@@ -4,6 +4,7 @@ import React, {Component} from "react";
 import {Text, View, ScrollView, TextInput} from "react-native";
 import {Button} from "react-native-elements";
 import {reduxForm, Field} from "redux-form";
+import validator from "validator";
 
 import Toolbar from "./../components/Toolbar";
 import InputText from "./../components/InputText";
@@ -19,12 +20,20 @@ class AddressDetails extends Component<{}> {
         navigateTo("confirmOrder");
     }
 
-    renderTextInput = ({placeholder, input: { onChange, ...restInput }}) => (
-        <InputText
-            onChangeText={onChange}
-            placeholder={placeholder}
-            {...restInput} />
-    );
+    renderTextInput = (field) => {
+        const {meta: {touched, error}, maxLength, keyboardType, placeholder, input: {onChange, ...restInput}} = field;
+        return (
+            <View>
+                <InputText
+                    onChangeText={onChange}
+                    maxLength={maxLength}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    {...restInput} />
+                <Text style={styles.errorText}>{touched ? error : ""}</Text>
+            </View>
+        );
+    }
 
     render() {
         const {handleSubmit, isEditAddress} = this.props;
@@ -42,7 +51,9 @@ class AddressDetails extends Component<{}> {
                   <View style={[styles.priceDetailContainer, styles.padding16]}>
                       <Field
                           name="pincode"
+                          maxLength={6}
                           placeholder="Pin Code"
+                          keyboardType="number-pad"
                           component={this.renderTextInput} />
                       <Field
                           name="locality"
@@ -66,10 +77,6 @@ class AddressDetails extends Component<{}> {
                           name="streetAddress"
                           placeholder="Address"
                           component={this.renderTextInput} />
-                      <Field
-                          name="mobile"
-                          placeholder="Mobile"
-                          component={this.renderTextInput} />
                   </View>
                   <Button
                       title="Save"
@@ -79,6 +86,39 @@ class AddressDetails extends Component<{}> {
           </View>
         );
     }
+}
+
+const validate = values => {
+    const errors = {}
+    if (!values.pincode) {
+        errors.pincode = "Pincode is required"
+    } else if(!validator.isNumeric(values.pincode.trim())) {
+        errors.pincode = "Please enter valid pincode"
+    }
+    if (!values.locality) {
+        errors.locality = "Locality is required"
+    } else if(!validator.isAlpha(values.locality.trim())) {
+        errors.locality = "Please enter valid locality"
+    }
+    if (!values.city) {
+        errors.city = "City is required"
+    } else if(!validator.isAlpha(values.city.trim())) {
+        errors.city = "Please enter valid city"
+    }
+    if (!values.state) {
+        errors.state = "State is required"
+    } else if(!validator.isAlpha(values.state.trim())) {
+        errors.state = "Please enter valid state"
+    }
+    if (!values.name) {
+        errors.name = "Name is required"
+    } else if(!/^[a-zA-Z ]+$/.test(values.name.trim() )) {
+        errors.name = "Please enter valid name"
+    }
+    if (!values.streetAddress) {
+        errors.streetAddress = "Address is required"
+    }
+    return errors
 }
 
 const mapStateToProps = (state, ownProps) => ({
@@ -91,6 +131,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    reduxForm({form: "address"})
+    reduxForm({form: "address", validate})
 )
 (AddressDetails);
