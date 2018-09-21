@@ -438,6 +438,19 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: "red"
+    },
+    cartitemNumber: {
+        position: "absolute",
+        top: 16,
+        left: 24,
+        fontWeight: "500",
+        zIndex: 1,
+        paddingHorizontal: 4,
+        paddingVertical: 2,
+        fontSize: 10,
+        color: "#ffffff",
+        backgroundColor: "red",
+        borderRadius: 50
     }
 });
 

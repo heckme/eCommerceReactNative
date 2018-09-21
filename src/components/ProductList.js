@@ -71,7 +71,7 @@ class ProductList extends Component<{}> {
                           </View>
                       }
                   </View>
-                  <Text style={styles.cardTextDesc}>
+                  <Text style={styles.cardTextDesc} ellipsizeMode="tail" numberOfLines={1}>
                     {product.productDesc}
                   </Text>
               </Card>

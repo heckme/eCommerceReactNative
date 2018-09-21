@@ -7,3 +7,5 @@ export const SET_ADDRESS = "SET_ADDRESS";
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
 export const AUTH_ERROR = "AUTH_ERROR";
+export const SET_PRODUCT_LIST = "SET_PRODUCT_LIST";
+export const SET_CATEGORY_LIST = "SET_CATEGORY_LIST"

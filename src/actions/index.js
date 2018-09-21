@@ -7,7 +7,9 @@ import {
     SET_ADDRESS,
     AUTHENTICATE,
     LOGOUT,
-    AUTH_ERROR
+    AUTH_ERROR,
+    SET_PRODUCT_LIST,
+    SET_CATEGORY_LIST
 } from "./../constants/action-types";
 
 import {authenticateUser, redirectTo} from "./../utils";
@@ -25,6 +27,10 @@ export const initAddressFrom = payload => ({type: INIT_ADDRESS_FORM, payload})
 export const resetAddressForm = () => ({type: RESET_ADDRESS_FORM})
 
 export const setAddress = payload => ({type: SET_ADDRESS, payload})
+
+export const setProductList = payload => ({type: SET_PRODUCT_LIST, payload})
+
+export const setCategoryList = payload => ({type: SET_CATEGORY_LIST, payload})
 
 export const registerUser = payload => {
     return dispatch => {

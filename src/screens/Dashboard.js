@@ -12,6 +12,7 @@ import MenuIcon from "./../components/MenuIcon";
 import {navigateTo} from "./../utils";
 import data from "./../config/data";
 import categories from "./../config/category";
+import {setCategoryList, setProductList} from "./../actions";
 
 import styles from "./../styles/styles";
 
@@ -20,8 +21,6 @@ class Dashboard extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            categories: [],
             showSearchbar: false
         };
     }
@@ -36,9 +35,7 @@ class Dashboard extends Component<{}> {
             const responsePromise = await api(GET_CATEGORIES_URL, "GET");
             const response = await responsePromise.json();
             if(response) {
-                this.setState({
-                    categories: response
-                });
+                this.props.setCategoryList(response);
             }
         } catch (e) {
             console.log(e);
@@ -50,9 +47,7 @@ class Dashboard extends Component<{}> {
             const responsePromise = await api(GET_PRODUCTS_URL, "GET");
             const response = await responsePromise.json();
             if(response) {
-                this.setState({
-                    data: response
-                });
+                this.props.setProductList(response);
             }
         } catch (e) {
             console.log(e);
@@ -103,9 +98,11 @@ class Dashboard extends Component<{}> {
 
     render() {
 
+        const {productsInCart, productList, categoryList} = this.props;
+
         const navigationView = (
             <Sidebar
-                categories={this.state.categories}
+                categories={categoryList ? categoryList : []}
                 handleCloseDrawer={this.closeDrawer}
                 handleNavigateToUserProfile={this.navigateToUserProfile}
                 onPressMenuItem={this.navigateToProductCatlog} />
@@ -139,6 +136,7 @@ class Dashboard extends Component<{}> {
                                           type="material-community"
                                           size={24}
                                           color="#000000"/>
+                                      {(productsInCart && productsInCart.length > 0) && <Text style={styles.cartitemNumber}>{productsInCart.length}</Text>}
                                   </View>
                               </TouchableOpacity>
                           </View>
@@ -157,15 +155,22 @@ class Dashboard extends Component<{}> {
                       }
                   <ProductList
                      handleNavigateToProductDetails={this.navigateToProductDetails}
-                     data={this.state.data}/>
+                     data={productList ? productList : []}/>
               </View>
          </DrawerLayoutAndroid>
         );
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    productsInCart: state.cart.productsInCart,
+    categoryList: state.dataList.categoryList,
+    productList: state.dataList.productList
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    setProductList: payload => dispatch(setProductList(payload)),
+    setCategoryList: payload => dispatch(setCategoryList(payload))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
