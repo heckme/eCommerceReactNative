@@ -9,7 +9,8 @@ import {
     LOGOUT,
     AUTH_ERROR,
     SET_PRODUCT_LIST,
-    SET_CATEGORY_LIST
+    SET_CATEGORY_LIST,
+    LOADER
 } from "./../constants/action-types";
 
 import {authenticateUser, redirectTo} from "./../utils";
@@ -31,6 +32,8 @@ export const setAddress = payload => ({type: SET_ADDRESS, payload})
 export const setProductList = payload => ({type: SET_PRODUCT_LIST, payload})
 
 export const setCategoryList = payload => ({type: SET_CATEGORY_LIST, payload})
+
+export const setLoader = payload => ({type: LOADER, payload})
 
 export const registerUser = payload => {
     return dispatch => {

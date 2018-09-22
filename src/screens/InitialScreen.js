@@ -20,7 +20,7 @@ class InitialScreen extends Component<{}> {
                     backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
                     onPress={() => navigateTo("login")}/>
                 <Button
-                    title="register"
+                    title="Register"
                     backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
                     onPress={() => navigateTo("signup")}/>
             </View>

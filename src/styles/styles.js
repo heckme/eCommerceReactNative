@@ -176,6 +176,14 @@ const styles = StyleSheet.create({
         backgroundColor: "red",
         paddingVertical: 14
     },
+    buttonWrapContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "red",
+        paddingVertical: 14,
+        marginHorizontal: 16
+    },
     flexButtonText: {
         fontSize: 18,
         color: "#ffffff",
@@ -451,6 +459,14 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         backgroundColor: "red",
         borderRadius: 50
+    },
+    authButton: {
+        backgroundColor: "#7468c5",
+        paddingVertical: 12
+    },
+    authButtonText: {
+        color: "#ffffff",
+        fontSize: 16
     }
 });
 

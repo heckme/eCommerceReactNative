@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {compose} from "redux";
 import React, {Component} from "react";
-import {Text, View, ScrollView} from "react-native";
+import {Text, View, ScrollView, ActivityIndicator} from "react-native";
 import {Button} from "react-native-elements";
 import {reduxForm, Field} from "redux-form";
 import validator from "validator";
@@ -11,6 +11,7 @@ import Toolbar from "./../components/Toolbar";
 import MenuIcon from "./../components/MenuIcon";
 import {navigateBack} from "./../utils";
 import {registerUser} from "./../actions";
+import ButtonWrap from "./../components/ButtonWrap";
 
 import styles from "./../styles/styles";
 
@@ -36,7 +37,7 @@ class Register extends Component<{}> {
     }
 
     render() {
-        const {handleSubmit} = this.props;
+        const {handleSubmit, loader} = this.props;
         return (
             <View style={[styles.dashboardContainer]}>
                 <Toolbar style={styles.transparentToobar}>
@@ -64,10 +65,16 @@ class Register extends Component<{}> {
                             secureTextEntry={true}
                             component={this.renderTextInput} />
                     </View>
-                    <Button
-                        title="Register"
-                        backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
-                        onPress={handleSubmit(this.onSubmit)}/>
+                    <ButtonWrap
+                        onPress={handleSubmit(this.onSubmit)}
+                        disabled={loader}
+                        style={styles.authButton}>
+                        {loader ?
+                          <ActivityIndicator color="#ffffff"/>
+                          :
+                          <Text style={styles.authButtonText}>Register</Text>
+                        }
+                    </ButtonWrap>
                 </ScrollView>
             </View>
         );
@@ -99,7 +106,9 @@ const validate = values => {
     return errors
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    loader: state.utils.loader
+});
 
 const mapDispatchToProps = dispatch => ({
     registerUser: payload => dispatch(registerUser(payload))

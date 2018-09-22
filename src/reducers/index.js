@@ -7,6 +7,7 @@ import app from "./appReducer";
 import cart from "./cartReducer";
 import deliveryAddress from "./addressReducer";
 import dataList from "./dataReducer";
+import utils from "./utilsReducer";
 
 const form = formReducer.plugin({
     address: (state, action) => {
@@ -27,7 +28,8 @@ const reducers = {
     cart,
     deliveryAddress,
     dataList,
-    form
+    form,
+    utils
 }
 
 export default combineReducers(reducers);
