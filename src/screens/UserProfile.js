@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
-import {Text, View, TouchableNativeFeedback} from "react-native";
+import {Text, View, TouchableNativeFeedback, ActivityIndicator} from "react-native";
 import {Avatar, List, ListItem, Icon} from "react-native-elements";
 
 import Toolbar from "./../components/Toolbar";
@@ -17,6 +17,7 @@ class UserProfile extends Component<{}> {
     }
 
     render() {
+        const {loader} = this.props;
 
         const myOrderIcon = (<Icon
                   containerStyle={styles.iconPadding}
@@ -63,7 +64,7 @@ class UserProfile extends Component<{}> {
                         <TouchableNativeFeedback  onPress={this.logoutUser}>
                             <ListItem
                                 leftIcon={logoutIcon}
-                                title="Logout" />
+                                title={loader ? <ActivityIndicator color="#7468c5" /> : "Logout"} />
                         </TouchableNativeFeedback>
                     </List>
                 </View>
@@ -73,7 +74,8 @@ class UserProfile extends Component<{}> {
 }
 
 const mapStateToProps = state => ({
-    token: state.app.token
+    token: state.app.token,
+    loader: state.utils.loader
 });
 
 const mapDispatchToProps = dispatch => ({

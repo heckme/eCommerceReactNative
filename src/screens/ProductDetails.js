@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
-import {Text, View, ScrollView, Animated, Easing} from "react-native";
+import {Text, View, ScrollView, Animated, Easing, ToastAndroid} from "react-native";
 import {Col, Row, Grid} from "react-native-easy-grid";
 import _ from "lodash";
 
@@ -28,7 +28,8 @@ class ProductDetails extends Component<{}> {
             size: "",
             isProductAddedToCart: false,
             isFlipped: false,
-            flipValue: new Animated.Value(0)
+            flipValue: new Animated.Value(0),
+            selectedSize: ""
         }
     }
 
@@ -60,9 +61,20 @@ class ProductDetails extends Component<{}> {
     }
 
     saveProductToCart = () => {
+        const {product} = this.props;
         if (!this.state.isProductAddedToCart) {
-            const {product} = this.props;
-            this.props.saveToCart(product);
+            if(product && product.sizeAvailable && product.sizeAvailable.length > 0 && !this.state.size) {
+                ToastAndroid.showWithGravityAndOffset(
+                    "Please select a size",
+                    ToastAndroid.SHORT,
+                    ToastAndroid.BOTTOM,
+                    0,
+                    150);
+                return false;
+            }
+            const productCopy = JSON.parse(JSON.stringify(product));
+            productCopy.selectedSize = this.state.size;
+            this.props.saveToCart(productCopy);
             this._flipButton();
             this.setState({
                 isProductAddedToCart: true,

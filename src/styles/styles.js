@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "#000000"
     },
+    nothingFound: {
+        fontSize: 18,
+        color: "#000000"
+    },
     menuIconContainer: {
         justifyContent: "space-around",
         padding: 16

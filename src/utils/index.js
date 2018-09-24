@@ -4,6 +4,8 @@ import _ from "lodash";
 import {RUPEE} from "./../constants/currency";
 import {api} from "./../services/api";
 import {AUTHENTICATE, LOGOUT, AUTH_ERROR} from "./../constants/action-types";
+import {persist} from "./../../App";
+import {setLoader} from "./../actions";
 
 export const redirectTo = (scene) => {
     if (Actions.currentScene) Actions.reset(scene);
@@ -58,12 +60,14 @@ export const renderOriginalPrice = (productsInCart) => {
 }
 
 export const authenticateUser = async (dispatch, payload, url) => {
+    persist.store.dispatch(setLoader(true));
     try {
         const response = await api(url, "POST", payload);
         if(response.status === 200 && response.headers.get("x-auth")) {
             const token = response.headers.get("x-auth");
             const user = await response.json();
             if(user) {
+                persist.store.dispatch(setLoader(false));
                 dispatch({
                     type: AUTHENTICATE,
                     user,
@@ -77,7 +81,30 @@ export const authenticateUser = async (dispatch, payload, url) => {
             throw new Error("Invalid User");
         }
     } catch (e) {
+        persist.store.dispatch(setLoader(false));
+        console.log(e);
+        dispatch({
+            type: AUTH_ERROR,
+            error: e
+        })
+    }
+}
+
+export const handleUserLogout = async (dispatch, token, url) => {
+    try {
+        persist.store.dispatch(setLoader(true));
+        const headers = {
+            "x-auth": token
+        }
+        const response = await api(url, "DELETE", {}, headers);
+        persist.store.dispatch(setLoader(false));
+        redirectTo("auth");
+        dispatch({
+            type: LOGOUT
+        });
+    } catch (e) {
         alert(e.message);
+        persist.store.dispatch(setLoader(false));
         dispatch({
             type: AUTH_ERROR,
             error: e.message

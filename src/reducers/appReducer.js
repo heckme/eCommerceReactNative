@@ -21,7 +21,6 @@ export default (state = initialState, action) => {
 
       case LOGOUT:
           return {
-            ...state,
             user: {},
             isLoggedin: false,
             token: "",

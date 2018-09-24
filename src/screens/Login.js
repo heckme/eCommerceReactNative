@@ -60,9 +60,9 @@ class Login extends Component<{}> {
                     disabled={loader}
                     style={styles.authButton}>
                     {loader ?
-                      <ActivityIndicator color="#ffffff"/>
-                      :
-                      <Text style={styles.authButtonText}>Login</Text>
+                        <ActivityIndicator color="#ffffff"/>
+                        :
+                        <Text style={styles.authButtonText}>Login</Text>
                     }
                 </ButtonWrap>
             </View>

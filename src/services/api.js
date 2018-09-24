@@ -1,9 +1,6 @@
 import {BASE_URL} from "./../config/settings";
-import {setLoader} from "./../actions";
-import {persist} from "./../../App";
 
 export const api = async (url, method, reqBody = {}, headers = {}) => {
-    persist.store.dispatch(setLoader(true));
     try {
         const URL = BASE_URL.concat(url);
         const body = Object.keys(reqBody).length && JSON.stringify(reqBody);
@@ -31,10 +28,8 @@ export const api = async (url, method, reqBody = {}, headers = {}) => {
         });
 
         const response = await Promise.race([fetchPromise, timerPromise]);
-        persist.store.dispatch(setLoader(false));
         return response;
     } catch(err) {
-        persist.store.dispatch(setLoader(false));
         return err;
     }
 }

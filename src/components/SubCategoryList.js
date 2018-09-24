@@ -24,7 +24,7 @@ class SubCategoryList extends Component<{}> {
             return (
                 <View key={index}>
                    <TouchableNativeFeedback
-                       onPress={() => this.props.onPressMenuItem(item.subCategoryTwoAlias)}>
+                       onPress={() => this.props.onPressMenuItem("subSubCategory" ,item.subCategoryTwoAlias)}>
                        <View style={styles.subCategoryItemHeight}>
                            <Text style={styles.subCatTwoListItem}>{item.subCategoryTwoName}</Text>
                        </View>
@@ -79,7 +79,7 @@ class SubCategoryList extends Component<{}> {
                 return (
                     <TouchableNativeFeedback
                         key={subCategory.subCategoryName}
-                        onPress={() => this.props.onPressMenuItem(subCategory.subCategoryAlias)}>
+                        onPress={() => this.props.onPressMenuItem("subCategory", subCategory.subCategoryAlias)}>
                         <View style={[styles.subCategoryItemHeight]}>
                             <Text style={styles.subCatListItem}>{subCategory.subCategoryName}</Text>
                         </View>

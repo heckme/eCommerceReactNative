@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
-import {Text, View, TouchableOpacity, DrawerLayoutAndroid, LayoutAnimation, UIManager} from "react-native";
+import {Text, View, TouchableOpacity, DrawerLayoutAndroid, LayoutAnimation, UIManager, ActivityIndicator} from "react-native";
 import {SearchBar, Icon} from "react-native-elements";
 
 import {api} from "./../services/api";
-import {GET_CATEGORIES_URL, GET_PRODUCTS_URL} from "./../constants/urls";
+import {GET_CATEGORIES_URL, GET_PRODUCTS_URL, GET_PRODUCT_DETAILS_URL} from "./../constants/urls";
 import ProductList from "./../components/ProductList";
 import Sidebar from "./../components/Sidebar";
 import Toolbar from "./../components/Toolbar";
@@ -12,7 +12,7 @@ import MenuIcon from "./../components/MenuIcon";
 import {navigateTo} from "./../utils";
 import data from "./../config/data";
 import categories from "./../config/category";
-import {setCategoryList, setProductList} from "./../actions";
+import {setCategoryList, setProductList, emptyCart, saveToCart} from "./../actions";
 
 import styles from "./../styles/styles";
 
@@ -21,21 +21,49 @@ class Dashboard extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
-            showSearchbar: false
+            showSearchbar: false,
+            isLoading: false
         };
     }
 
     componentDidMount() {
         this._fetchCategories();
         this._fetchProductList();
+        this._validateProductsInCart();
+    }
+
+    _validateProductsInCart = async () => {
+        const {productsInCart, emptyCart, saveToCart} = this.props;
+        if (productsInCart && productsInCart.length > 0) {
+            const cartCopy = JSON.parse(JSON.stringify(productsInCart));
+            emptyCart();
+            cartCopy.forEach(async product => {
+                try {
+                    const responsePromise = await api(`${GET_PRODUCT_DETAILS_URL}/${product._id}`, "GET");
+                    const response = await responsePromise.json();
+                    if(response) {
+                        if(product.selectedSize) {
+                            response.selectedSize = product.selectedSize;
+                        }
+                        saveToCart(response);
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            });
+        }
     }
 
     _fetchCategories = async () => {
         try {
             const responsePromise = await api(GET_CATEGORIES_URL, "GET");
-            const response = await responsePromise.json();
-            if(response) {
-                this.props.setCategoryList(response);
+            if (responsePromise && responsePromise.status === 200) {
+                const response = await responsePromise.json();
+                if(response) {
+                    this.props.setCategoryList(response);
+                }
+            } else {
+                throw new Error("Something went wrong. Please try again.")
             }
         } catch (e) {
             console.log(e);
@@ -44,13 +72,26 @@ class Dashboard extends Component<{}> {
 
     _fetchProductList = async () => {
         try {
+            this.setState({
+                isLoading: true
+            });
             const responsePromise = await api(GET_PRODUCTS_URL, "GET");
-            const response = await responsePromise.json();
-            if(response) {
-                this.props.setProductList(response);
+            if (responsePromise && responsePromise.status === 200) {
+                const response = await responsePromise.json();
+                if (response) {
+                    this.props.setProductList(response);
+                    this.setState({
+                        isLoading: false
+                    });
+                }
+            } else {
+                throw new Error("Something went wrong. Please try again.")
             }
         } catch (e) {
             console.log(e);
+            this.setState({
+                isLoading: false
+            });
         }
     }
 
@@ -67,9 +108,9 @@ class Dashboard extends Component<{}> {
         console.log("search clear");
     }
 
-    navigateToProductCatlog = (category) => {
+    navigateToProductCatlog = (queryKey, queryString) => {
         this.closeDrawer();
-        navigateTo("productCatlog", {category});
+        navigateTo("productCatlog", {queryKey, queryString});
     }
 
     navigateToProductDetails = (product) => {
@@ -152,10 +193,16 @@ class Dashboard extends Component<{}> {
                           onChangeText={this.onSearchChange}
                           onClearText={this.onClearSearch}
                           placeholder='Search Here...' />
-                      }
-                  <ProductList
-                     handleNavigateToProductDetails={this.navigateToProductDetails}
-                     data={productList ? productList : []}/>
+                  }
+                  {this.state.isLoading ?
+                      <View style={[styles.dashboardContainer, styles.justifyCenter]}>
+                          <ActivityIndicator size="large" color="#7468c5" />
+                      </View>
+                    :
+                      <ProductList
+                         handleNavigateToProductDetails={this.navigateToProductDetails}
+                         data={productList ? productList : []} />
+                  }
               </View>
          </DrawerLayoutAndroid>
         );
@@ -170,7 +217,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setProductList: payload => dispatch(setProductList(payload)),
-    setCategoryList: payload => dispatch(setCategoryList(payload))
+    setCategoryList: payload => dispatch(setCategoryList(payload)),
+    emptyCart: () => dispatch(emptyCart()),
+    saveToCart: product => dispatch(saveToCart(product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

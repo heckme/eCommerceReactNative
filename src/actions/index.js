@@ -10,10 +10,11 @@ import {
     AUTH_ERROR,
     SET_PRODUCT_LIST,
     SET_CATEGORY_LIST,
-    LOADER
+    LOADER,
+    EMPTY_CART
 } from "./../constants/action-types";
 
-import {authenticateUser, redirectTo} from "./../utils";
+import {authenticateUser, redirectTo, handleUserLogout} from "./../utils";
 import {api} from "./../services/api";
 import {LOGIN_URL, LOGOUT_URL, REGISTER_URL} from "./../constants/urls";
 
@@ -26,6 +27,8 @@ export const handleChange = payload => ({type: HANDLE_CHANGE, payload})
 export const initAddressFrom = payload => ({type: INIT_ADDRESS_FORM, payload})
 
 export const resetAddressForm = () => ({type: RESET_ADDRESS_FORM})
+
+export const emptyCart = () => ({type: EMPTY_CART})
 
 export const setAddress = payload => ({type: SET_ADDRESS, payload})
 
@@ -53,21 +56,6 @@ export const checkAuthentication = token => {
 
 export const logoutUser = token => {
     return async dispatch => {
-        try {
-            const headers = {
-                "x-auth": token
-            }
-            const response = await api(LOGOUT_URL, "DELETE", {}, headers);
-            redirectTo("auth");
-            dispatch({
-                type: LOGOUT
-            });
-        } catch (e) {
-            alert(e.message);
-            dispatch({
-                type: AUTH_ERROR,
-                error: e.message
-            })
-        }
+        handleUserLogout(dispatch, token, LOGOUT_URL);
     }
 }

@@ -13,7 +13,7 @@ class ButtonWrap extends Component<{}> {
 
     render() {
         return (
-          <TouchableNativeFeedback onPress={this.props.onPress} disabled={this.props.disabled}>
+          <TouchableNativeFeedback onPress={this.props.onPress}>
               <View style={[styles.buttonWrapContainer, this.props.style]}>
                   {this.props.children}
               </View>

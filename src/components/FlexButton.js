@@ -11,14 +11,15 @@ const defaultProps = {
   iconSize: 12,
   iconColor: "#000000",
   iconType: "material-community",
-  onPress: () => {}
+  onPress: () => {},
+  disabled: false
 }
 
 class FlexButton extends Component<{}> {
 
     render() {
         return (
-          <TouchableNativeFeedback onPress={this.props.onPress}>
+          <TouchableNativeFeedback onPress={this.props.onPress} disabled={this.props.disabled}>
               <View style={[styles.flexButtonContainer, this.props.style]}>
                   {this.props.iconName !== "" &&
                       <Icon

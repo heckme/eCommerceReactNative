@@ -18,7 +18,7 @@ class ProductList extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
-            imageHeight: ""
+            imageHeight: "auto"
         }
     }
 
@@ -31,7 +31,7 @@ class ProductList extends Component<{}> {
     }
 
     onCardlayout = () => {
-        var {height, width} = Dimensions.get('window');
+        var {height, width} = Dimensions.get("window");
         const cardWidth = parseInt(width) / 2;
         const height = (cardWidth * 133.33) / 100;
         this.setState({
@@ -46,6 +46,7 @@ class ProductList extends Component<{}> {
         }
         const thumbnail = product.thumbnail.split("/");
         const thumbnailUrl = `${BASE_URL}/${thumbnail[1]}/${thumbnail[2]}`;
+
         return (
           <TouchableOpacity onPress={() => this.handleNavigateToProductDetails(product)}>
               <Card
