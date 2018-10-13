@@ -6,10 +6,11 @@ import styles from "./../styles/styles";
 class StickyFooter extends Component<{}> {
 
     render() {
+        const {children} = this.props;
         return (
-          <View style={styles.stickyFooterContainer}>
-              {this.props.children}
-          </View>
+            <View style={styles.stickyFooterContainer}>
+                {children}
+            </View>
         );
     }
 }

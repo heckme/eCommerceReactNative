@@ -1,13 +1,22 @@
+import PropTypes from "prop-types";
 import React, {Component} from "react";
-import {Text, View} from "react-native";
+import {View} from "react-native";
 
 import CategoryListItem from "./CategoryListItem";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
+
+const propTypes = {
+    categories: PropTypes.array,
+    handleUpdateSubCategoriesList: PropTypes.func,
+    onPressMenuItem: PropTypes.func
+};
 
 const defaultProps = {
-    handleSlideSubCategory: () => {}
-}
+    categories: [],
+    handleUpdateSubCategoriesList: () => {},
+    onPressMenuItem: () => {}
+};
 
 class CategoryList extends Component<{}> {
 
@@ -23,10 +32,11 @@ class CategoryList extends Component<{}> {
     }
 
     handleUpdateSubCategoriesList = (category) => {
-        if (category.hasOwnProperty("subCategories") && category.subCategories.length > 0) {
-            this.props.handleUpdateSubCategoriesList(category.categoryName, category.subCategories);
+        const {handleUpdateSubCategoriesList, onPressMenuItem} = this.props;
+        if (category.subCategories && category.subCategories.length > 0) {
+            handleUpdateSubCategoriesList(category.categoryName, category.subCategories);
         } else {
-            this.props.onPressMenuItem("category", category.categoryAlias);
+            onPressMenuItem("category", category.categoryAlias);
         }
     }
 
@@ -41,5 +51,7 @@ class CategoryList extends Component<{}> {
 }
 
 CategoryList.defaultProps = defaultProps;
+
+CategoryList.propTypes = propTypes;
 
 export default CategoryList;

@@ -1,13 +1,25 @@
+import PropTypes from "prop-types";
 import React, {Component} from "react";
 import {Text, View, ScrollView, Animated} from "react-native";
-import {Icon} from "react-native-elements";
 
 import MenuIcon from "./MenuIcon";
 import SidebarHeader from "./SidebarHeader";
 import CategoryList from "./CategoryList";
 import SubCategoryList from "./SubCategoryList";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
+
+const propTypes = {
+    categories: PropTypes.array,
+    handleNavigateToUserProfile: PropTypes.func,
+    onPressMenuItem: PropTypes.func
+};
+
+const defaultProps = {
+    categories: [],
+    handleNavigateToUserProfile: () => {},
+    onPressMenuItem: () => {}
+};
 
 class Sidebar extends Component<{}> {
 
@@ -18,7 +30,7 @@ class Sidebar extends Component<{}> {
             categories: [],
             subCategories: [],
             subcategoryHeading: ""
-        }
+        };
         this.isSubCategoryHidden = true;
     }
 
@@ -40,46 +52,53 @@ class Sidebar extends Component<{}> {
     }
 
     _toggleSubCategory = () => {
+        const {slideValue} = this.state;
         let toValue = 300;
-        if(this.isSubCategoryHidden) toValue = 0;
+        if (this.isSubCategoryHidden) toValue = 0;
         Animated.timing(
-            this.state.slideValue,
+            slideValue,
             {
-              toValue: toValue,
-              duration: 250
+                toValue,
+                duration: 250
             }
         ).start();
         this.isSubCategoryHidden = !this.isSubCategoryHidden;
     }
 
     render() {
+        const {handleNavigateToUserProfile, onPressMenuItem} = this.props;
+        const {categories, slideValue, subcategoryHeading, subCategories} = this.state;
         return (
             <View style={styles.sidebarContainer}>
                 <ScrollView>
                     <SidebarHeader
-                        handleNavigateToUserProfile={this.props.handleNavigateToUserProfile}/>
+                        handleNavigateToUserProfile={handleNavigateToUserProfile} />
                     <CategoryList
                         handleUpdateSubCategoriesList={this.updateSubCategoriesList}
-                        categories={this.state.categories}
-                        onPressMenuItem={this.props.onPressMenuItem} />
+                        categories={categories}
+                        onPressMenuItem={onPressMenuItem} />
                 </ScrollView>
-                <Animated.View style={[styles.subCategoryContainer, {transform: [{translateX: this.state.slideValue}]}]}>
+                <Animated.View style={[styles.subCategoryContainer, {transform: [{translateX: slideValue}]}]}>
                     <View style={styles.subCatHeader}>
                         <MenuIcon
                             name="arrow-left"
                             size={24}
-                            onPress={this._toggleSubCategory}/>
-                        <Text style={styles.categoryTitle}>{this.state.subcategoryHeading}</Text>
+                            onPress={this._toggleSubCategory} />
+                        <Text style={styles.categoryTitle}>{subcategoryHeading}</Text>
                     </View>
                     <ScrollView>
                         <SubCategoryList
-                            subCategories={this.state.subCategories}
-                            onPressMenuItem={this.props.onPressMenuItem}/>
+                            subCategories={subCategories}
+                            onPressMenuItem={onPressMenuItem} />
                     </ScrollView>
                 </Animated.View>
             </View>
         );
     }
 }
+
+Sidebar.defaultProps = defaultProps;
+
+Sidebar.propTypes = propTypes;
 
 export default Sidebar;

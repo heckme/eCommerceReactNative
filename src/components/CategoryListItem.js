@@ -1,8 +1,17 @@
+import PropTypes from "prop-types";
 import React, {Component} from "react";
 import {Text, View, TouchableNativeFeedback} from "react-native";
 import {Icon} from "react-native-elements";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
+
+const propTypes = {
+    style: PropTypes.object,
+    itemName: PropTypes.string,
+    iconName: PropTypes.string,
+    iconSize: PropTypes.number,
+    onPress: () => {}
+};
 
 const defaultProps = {
     style: {},
@@ -10,20 +19,21 @@ const defaultProps = {
     iconName: "human-female",
     iconSize: 23,
     onPress: () => {}
-}
+};
 
 class CategoryListItem extends Component<{}> {
 
     render() {
+        const {onPress, iconName, iconSize, itemName, style} = this.props;
         return (
-            <TouchableNativeFeedback onPress={this.props.onPress}>
-                <View style={[styles.flexRow, styles.alignCenter, styles.listItemContainer, this.props.style]}>
+            <TouchableNativeFeedback onPress={onPress}>
+                <View style={[styles.flexRow, styles.alignCenter, styles.listItemContainer, style]}>
                     <Icon
-                        name={this.props.iconName}
+                        name={iconName}
                         type="material-community"
-                        size={this.props.iconSize}
-                        color='#000000'/>
-                    <Text style={styles.menuListText}>{this.props.itemName}</Text>
+                        size={iconSize}
+                        color="#000000" />
+                    <Text style={styles.menuListText}>{itemName}</Text>
                 </View>
             </TouchableNativeFeedback>
         );
@@ -31,5 +41,7 @@ class CategoryListItem extends Component<{}> {
 }
 
 CategoryListItem.defaultProps = defaultProps;
+
+CategoryListItem.propTypes = propTypes;
 
 export default CategoryListItem;

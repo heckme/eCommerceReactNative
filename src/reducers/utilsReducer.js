@@ -1,8 +1,8 @@
-import {LOADER} from "./../constants/action-types";
+import {LOADER} from "../constants/action-types";
 
 const initialState = {
     loader: false
-}
+};
 
 export default (state = initialState, action) => {
 
@@ -12,10 +12,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 loader: action.payload
-            }
+            };
 
         default:
             return state;
     }
 
-}
+};

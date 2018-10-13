@@ -1,37 +1,45 @@
+import PropTypes from "prop-types";
 import React, {Component} from "react";
 import {Text, View} from "react-native";
-import {Button} from "react-native-elements"
+import {Button} from "react-native-elements";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
+
+const propTypes = {
+    address: PropTypes.object,
+    handleEditAddress: PropTypes.func,
+    handleAddNewAddress: PropTypes.func
+};
 
 const defaultProps = {
-    address: {}
-}
+    address: {},
+    handleEditAddress: () => {},
+    handleAddNewAddress: () => {}
+};
 
 class AddressComponent extends Component<{}> {
-
     render() {
-        const {address} = this.props;
+        const {address, handleEditAddress, handleAddNewAddress} = this.props;
         return (
             <View style={[styles.priceDetailContainer]}>
                 <Text style={styles.addressText}>
                     {address.streetAddress}, {address.locality}, {address.city}, {address.pincode}, {address.state}
                 </Text>
-                <View style={[styles.rowContainer, {justifyContent: "space-between", paddingTop: 16, paddingBottom: 16}]}>
+                <View style={[styles.rowContainer, styles.addressButtonCont]}>
                     <Button
-                        onPress={this.props.handleEditAddress}
+                        onPress={handleEditAddress}
                         title="Edit Address"
                         backgroundColor="#efefef"
                         raised
-                        textStyle={{color: "#000000"}}
-                        />
+                        textStyle={styles.colorBlack}
+                    />
                     <Button
-                        onPress={this.props.handleAddNewAddress}
+                        onPress={handleAddNewAddress}
                         title="Add New Address"
                         backgroundColor="#efefef"
                         raised
-                        textStyle={{color: "#000000"}}
-                        />
+                        textStyle={styles.colorBlack}
+                    />
                 </View>
             </View>
         );
@@ -39,5 +47,7 @@ class AddressComponent extends Component<{}> {
 }
 
 AddressComponent.defaultProps = defaultProps;
+
+AddressComponent.propTypes = propTypes;
 
 export default AddressComponent;

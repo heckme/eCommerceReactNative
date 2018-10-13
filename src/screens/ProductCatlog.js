@@ -31,10 +31,6 @@ class ProductCatlog extends Component<{}> {
         this._fetchProductList();
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-    }
-
     _fetchProductList = async () => {
         try {
             this.setState({
@@ -93,7 +89,6 @@ class ProductCatlog extends Component<{}> {
                             </View>
                         }
                     </View>
-
                 }
             </View>
         );

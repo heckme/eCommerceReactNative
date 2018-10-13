@@ -1,8 +1,8 @@
-import { StyleSheet , Dimensions} from 'react-native';
+import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     appContainer: {
-        flex: 1,
+        flex: 1
     },
     appTitle: {
         fontSize: 18,
@@ -18,23 +18,23 @@ const styles = StyleSheet.create({
     },
     dashboardContainer: {
         flex: 1,
-        backgroundColor: "#fefefe",
+        backgroundColor: "#fefefe"
     },
     cartContainer: {
         flex: 1,
-        backgroundColor: "#fefefe",
+        backgroundColor: "#fefefe"
     },
     addressContainer: {
         flex: 1,
-        backgroundColor: "#fefefe",
+        backgroundColor: "#fefefe"
     },
     productContainer: {
         flex: 1,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#ffffff"
     },
     confirmContainer: {
         flex: 1,
-        backgroundColor: "#fefefe",
+        backgroundColor: "#fefefe"
     },
     sidebarContainer: {
         flex: 1,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
     profileContainer: {
         flex: 1,
-        backgroundColor: "#fefefe",
+        backgroundColor: "#fefefe"
     },
     toolbarContainer: {
         height: 56,
@@ -64,21 +64,21 @@ const styles = StyleSheet.create({
     },
     utilsIcon: {
         width: 45,
-        justifyContent:"center",
+        justifyContent: "center",
         alignItems: "center",
         paddingVertical: 8
     },
     justifyCenter: {
-        justifyContent: "center",
+        justifyContent: "center"
     },
     alignCenter: {
-        alignItems: "center",
+        alignItems: "center"
     },
     justifySpaceBetween: {
         justifyContent: "space-between"
     },
     cardContainer: {
-        marginTop:0,
+        marginTop: 0,
         marginLeft: 0,
         marginRight: 0,
         marginBottom: 0,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     cardTextTitle: {
         marginBottom: 2,
         fontSize: 14,
-        color: "#000",
+        color: "#000"
     },
     cardTextSubtitle: {
         marginBottom: 2,
@@ -105,25 +105,25 @@ const styles = StyleSheet.create({
         paddingRight: 4
     },
     lineThrough: {
-        textDecorationLine: 'line-through'
+        textDecorationLine: "line-through"
     },
     redColorText: {
         color: "#ff5722"
     },
     cardTextDesc: {
-        fontSize: 12,
+        fontSize: 12
     },
     swiperWrapper: {
         height: 440
     },
     swiperSlide: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: "center"
     },
     productDetailContainer: {
         borderBottomWidth: 1,
         borderBottomColor: "#dddddd",
-        backgroundColor:"#ffffff",
+        backgroundColor: "#ffffff",
         padding: 16
     },
     productTitle: {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         marginRight: 16
     },
     activeSize: {
-        borderColor: "#11cda7",
+        borderColor: "#11cda7"
     },
     activeSizeText: {
         color: "#11cda7"
@@ -194,15 +194,15 @@ const styles = StyleSheet.create({
         marginHorizontal: 8
     },
     stickyFooterContainer: {
-        backgroundColor: '#ffffff',
-        flexDirection: 'row',
+        backgroundColor: "#ffffff",
+        flexDirection: "row",
         bottom: 0,
         left: 0,
         right: 0,
-        position:"absolute",
-        alignItems: 'stretch',
+        position: "absolute",
+        alignItems: "stretch",
         flex: 1,
-        elevation:8,
+        elevation: 8,
         height: 56
     },
     bottomGapInScrollView: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     cartItemContainer: {
         marginBottom: 16,
         marginRight: 16,
-        marginLeft:16,
+        marginLeft: 16,
         elevation: 3,
         borderTopWidth: 1,
         borderRightWidth: 1,
@@ -224,12 +224,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
         paddingTop: 16,
         paddingLeft: 16,
-        paddingRight: 16,
+        paddingRight: 16
     },
     priceDetailContainer: {
         marginBottom: 16,
         marginRight: 16,
-        marginLeft:16,
+        marginLeft: 16,
         elevation: 3,
         borderTopWidth: 1,
         borderRightWidth: 1,
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderTopWidth: 1,
-        borderTopColor: "#dddddd",
+        borderTopColor: "#dddddd"
     },
     removeCartItemText: {
         fontSize: 16,
@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
     userInfoContainer: {
         height: 170,
         backgroundColor: "#333333",
-        paddingHorizontal: 32 ,
+        paddingHorizontal: 32,
         justifyContent: "center"
     },
     userNameCont: {
@@ -367,15 +367,15 @@ const styles = StyleSheet.create({
     menuListText: {
         fontSize: 16,
         fontWeight: "500",
-        paddingHorizontal: 8 ,
+        paddingHorizontal: 8,
     },
     subCategoryContainer: {
         position: "absolute",
         bottom: 0,
         left: 0,
         right: 0,
-        top:0,
-        backgroundColor: "#FFFFFF",
+        top: 0,
+        backgroundColor: "#FFFFFF"
     },
     subCatHeader: {
         height: 80,
@@ -392,9 +392,9 @@ const styles = StyleSheet.create({
     subCatListItem: {
         fontSize: 16,
         paddingHorizontal: 32,
-        color: "#333333",
+        color: "#333333"
     },
-    subCategoryItemHeight:  {
+    subCategoryItemHeight: {
         height: 60,
         justifyContent: "center",
         borderBottomColor: "#eeeeee",
@@ -419,10 +419,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     iconPadding: {
-        paddingHorizontal : 8
-    },
-    boldText: {
-        fontWeight: "500"
+        paddingHorizontal: 8
     },
     relativeCont: {
         position: "relative"
@@ -471,6 +468,14 @@ const styles = StyleSheet.create({
     authButtonText: {
         color: "#ffffff",
         fontSize: 16
+    },
+    addressButtonCont: {
+        justifyContent: "space-between",
+        paddingTop: 16,
+        paddingBottom: 16
+    },
+    colorBlack: {
+        color: "#000000"
     }
 });
 

@@ -1,11 +1,20 @@
+import PropTypes from "prop-types";
 import React, {Component} from "react";
 import {Text, View, Image} from "react-native";
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid} from "react-native-easy-grid";
 import moment from "moment";
 
-import {BASE_URL} from "./../config/settings";
+import {BASE_URL} from "../config/settings";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
+
+const propTypes = {
+    productsInCart: PropTypes.array
+};
+
+const defaultProps = {
+    productsInCart: []
+};
 
 class DeliveryEstimate extends Component<{}> {
 
@@ -14,11 +23,11 @@ class DeliveryEstimate extends Component<{}> {
             const thumbnail = product.thumbnail.split("/");
             const thumbnailUrl = `${BASE_URL}/${thumbnail[1]}/${thumbnail[2]}`;
             return (
-                <View key={index} style={[styles.rowContainer, styles.padding16, (index !== 0) ? styles.borderTop : ""]}>
-                    <Grid style={{alignItems: "center"}}>
+                <View key={product._id} style={[styles.rowContainer, styles.padding16, (index !== 0) ? styles.borderTop : ""]}>
+                    <Grid style={styles.alignCenter}>
                         <Col size={2}>
                             <Image resizeMode="contain" style={styles.cartImageStyle} source={{uri: thumbnailUrl}} />
-                        </Col >
+                        </Col>
                         <Col size={3}>
                             <Text style={styles.deliveryText}>Estimated Delivery</Text>
                         </Col>
@@ -27,18 +36,22 @@ class DeliveryEstimate extends Component<{}> {
                         </Col>
                     </Grid>
                 </View>
-            )
+            );
         });
     }
 
     render() {
         const {productsInCart} = this.props;
         return (
-          <View style={styles.priceDetailContainer}>
-              {this.renderEstimateItems(productsInCart)}
-          </View>
+            <View style={styles.priceDetailContainer}>
+                {this.renderEstimateItems(productsInCart)}
+            </View>
         );
     }
 }
+
+DeliveryEstimate.defaultProps = defaultProps;
+
+DeliveryEstimate.propTypes = propTypes;
 
 export default DeliveryEstimate;

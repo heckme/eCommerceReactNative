@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Text, View, TouchableNativeFeedback, LayoutAnimation, UIManager} from "react-native";
 import {Icon} from "react-native-elements";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
 
 class SubCategoryList extends Component<{}> {
 
@@ -11,7 +11,7 @@ class SubCategoryList extends Component<{}> {
         this.state = {
             isListHidden: true,
             listName: ""
-        }
+        };
     }
 
     _animate = () => {
@@ -20,31 +20,33 @@ class SubCategoryList extends Component<{}> {
     }
 
     renderAccordianList = (list) => {
+        const {onPressMenuItem} = this.props;
         return list.map((item, index) => {
             return (
                 <View key={index}>
-                   <TouchableNativeFeedback
-                       onPress={() => this.props.onPressMenuItem("subSubCategory" ,item.subCategoryTwoAlias)}>
-                       <View style={styles.subCategoryItemHeight}>
-                           <Text style={styles.subCatTwoListItem}>{item.subCategoryTwoName}</Text>
-                       </View>
-                   </TouchableNativeFeedback>
+                    <TouchableNativeFeedback
+                        onPress={() => onPressMenuItem("subSubCategory", item.subCategoryTwoAlias)}>
+                        <View style={styles.subCategoryItemHeight}>
+                            <Text style={styles.subCatTwoListItem}>{item.subCategoryTwoName}</Text>
+                        </View>
+                    </TouchableNativeFeedback>
                 </View>
             );
         });
     }
 
-    _toggleList = (listName) => {
-        if (listName !== this.state.listName) {
+    _toggleList = (ln) => {
+        const {listName, isListHidden} = this.state;
+        if (ln !== listName) {
             this.setState({
-                listName,
+                listName: ln,
                 isListHidden: false
             }, () => {
                 this._animate();
             });
         } else {
             this.setState({
-                isListHidden: !this.state.isListHidden,
+                isListHidden: !isListHidden
             }, () => {
                 this._animate();
             });

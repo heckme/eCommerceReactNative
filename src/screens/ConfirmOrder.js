@@ -1,17 +1,16 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
 import {Text, View, ScrollView} from "react-native";
-import { Button } from "react-native-elements";
+import {Button} from "react-native-elements";
 
-import {navigateTo, calculateDiscount, renderOfferPrice} from "./../utils";
-import FlexButton from "./../components/FlexButton";
-import AddressComponent from "./../components/AddressComponent";
-import DeliveryEstimate from "./../components/DeliveryEstimate";
-import OrderSummery from "./../components/OrderSummery";
-import Toolbar from "./../components/Toolbar";
-import {resetAddressForm} from "./../actions";
+import {navigateTo, renderOfferPrice} from "../utils";
+import AddressComponent from "../components/AddressComponent";
+import DeliveryEstimate from "../components/DeliveryEstimate";
+import OrderSummery from "../components/OrderSummery";
+import Toolbar from "../components/Toolbar";
+import {resetAddressForm} from "../actions";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
 
 class ConfirmOrder extends Component<{}> {
 
@@ -25,7 +24,7 @@ class ConfirmOrder extends Component<{}> {
     }
 
     render() {
-        const {deliveryAddress: {address}, productsInCart,} = this.props;
+        const {deliveryAddress: {address}, productsInCart} = this.props;
         return (
             <View style={styles.confirmContainer}>
                 <Toolbar>
@@ -40,7 +39,7 @@ class ConfirmOrder extends Component<{}> {
                     <AddressComponent
                         handleAddNewAddress={this.onAddNewAddress}
                         handleEditAddress={this.onEditAddress}
-                        address={address ? address : ""} />
+                        address={address} />
                     <View style={[styles.itemHeadingContainer, styles.noPaddingTop]}>
                         <Text style={styles.boldText}>Estimated Delivery Time</Text>
                     </View>
@@ -50,9 +49,10 @@ class ConfirmOrder extends Component<{}> {
                     </View>
                     <OrderSummery totalItems={productsInCart.length} totalPrice={renderOfferPrice(productsInCart)} />
                     <Button
-                        title="Comfirm Order"
-                        backgroundColor="#7468c5" buttonStyle={styles.marginBottom16}
-                        onPress={() => console.log("confirm order")}/>
+                        title="Confirm Order"
+                        backgroundColor="#7468c5"
+                        buttonStyle={styles.marginBottom16}
+                        onPress={() => console.log("confirm order")} />
                 </ScrollView>
             </View>
         );

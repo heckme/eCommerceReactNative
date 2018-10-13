@@ -3,18 +3,16 @@ import React, {Component} from "react";
 import {Text, View, TouchableOpacity, DrawerLayoutAndroid, LayoutAnimation, UIManager, ActivityIndicator} from "react-native";
 import {SearchBar, Icon} from "react-native-elements";
 
-import {api} from "./../services/api";
-import {GET_CATEGORIES_URL, GET_PRODUCTS_URL, GET_PRODUCT_DETAILS_URL} from "./../constants/urls";
-import ProductList from "./../components/ProductList";
-import Sidebar from "./../components/Sidebar";
-import Toolbar from "./../components/Toolbar";
-import MenuIcon from "./../components/MenuIcon";
-import {navigateTo} from "./../utils";
-import data from "./../config/data";
-import categories from "./../config/category";
-import {setCategoryList, setProductList, emptyCart, saveToCart} from "./../actions";
+import {api} from "../services/api";
+import {GET_CATEGORIES_URL, GET_PRODUCTS_URL, GET_PRODUCT_DETAILS_URL} from "../constants/urls";
+import ProductList from "../components/ProductList";
+import Sidebar from "../components/Sidebar";
+import Toolbar from "../components/Toolbar";
+import MenuIcon from "../components/MenuIcon";
+import {navigateTo} from "../utils";
+import {setCategoryList, setProductList, emptyCart, saveToCart} from "../actions";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
 
 class Dashboard extends Component<{}> {
 
@@ -85,7 +83,7 @@ class Dashboard extends Component<{}> {
                     });
                 }
             } else {
-                throw new Error("Something went wrong. Please try again.")
+                throw new Error("Something went wrong. Please try again.");
             }
         } catch (e) {
             console.log(e);
@@ -159,7 +157,7 @@ class Dashboard extends Component<{}> {
                   <Toolbar>
                       <MenuIcon name="menu" size={24} onPress={this.openDrawer}/>
                       <View style={styles.toolbarUtils}>
-                          <Text style={styles.appTitle}>E-Com</Text>
+                          <Text style={styles.appTitle}>eCommerce</Text>
                           <View style={[styles.rowContainer, styles.utilsIconCont, styles.justifySpaceBetween]}>
                               <TouchableOpacity onPress={this.toggleSearchbar}>
                                 <View style={styles.utilsIcon}>

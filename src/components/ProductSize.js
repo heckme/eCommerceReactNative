@@ -1,11 +1,20 @@
+import PropTypes from "prop-types";
 import React, {Component} from "react";
 import {Text, View, TouchableOpacity} from "react-native";
 
-import styles from "./../styles/styles";
+import styles from "../styles/styles";
+
+const propTypes = {
+    size: PropTypes.size,
+    handleProductSize: PropTypes.func,
+    sizeAvailable: PropTypes.array
+};
 
 const defaultProps = {
-    size: ""
-}
+    size: "",
+    handleProductSize: () => {},
+    sizeAvailable: []
+};
 
 class ProductSize extends Component<{}> {
 
@@ -19,14 +28,17 @@ class ProductSize extends Component<{}> {
                 return "L";
             case "extra-large":
                 return "XL";
+            default:
+                return "";
         }
     }
 
     renderSizeButton = (sizeAvailable) => {
-        return sizeAvailable.map(size => (
-            <TouchableOpacity key={size} onPress={()=> this.props.handleProductSize(size)}>
-                <View style={[styles.circularCont, this.props.size === size ? styles.activeSize: {}]}>
-                    <Text style={this.props.size === size ? styles.activeSizeText: {}}>{this.renderSizeAlias(size)}</Text>
+        const {handleProductSize, size} = this.props;
+        return sizeAvailable.map(avlSize => (
+            <TouchableOpacity key={avlSize} onPress={() => handleProductSize(avlSize)}>
+                <View style={[styles.circularCont, size === avlSize && styles.activeSize]}>
+                    <Text style={size === avlSize && styles.activeSizeText}>{this.renderSizeAlias(avlSize)}</Text>
                 </View>
             </TouchableOpacity>
         ));
@@ -35,16 +47,18 @@ class ProductSize extends Component<{}> {
     render() {
         const {sizeAvailable} = this.props;
         return (
-          <View style={styles.productDetailContainer}>
-              <Text style={styles.productSize}>Size</Text>
-              <View style={styles.sizeContainer}>
-                  {this.renderSizeButton(sizeAvailable)}
-              </View>
-          </View>
+            <View style={styles.productDetailContainer}>
+                <Text style={styles.productSize}>Size</Text>
+                <View style={styles.sizeContainer}>
+                    {this.renderSizeButton(sizeAvailable)}
+                </View>
+            </View>
         );
     }
 }
 
 ProductSize.defaultProps = defaultProps;
+
+ProductSize.propTypes = propTypes;
 
 export default ProductSize;
